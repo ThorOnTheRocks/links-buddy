@@ -1,5 +1,9 @@
-import Image from 'next/image';
+import { ReactNode } from 'react';
 
-export default function Home() {
-  return <main>DevLinks</main>;
+export default function Home(): ReactNode {
+  return (
+    <main>
+      <h1>DevLinks</h1>
+    </main>
+  );
 }

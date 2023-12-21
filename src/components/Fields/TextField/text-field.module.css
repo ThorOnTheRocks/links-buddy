@@ -1,0 +1,49 @@
+.containerTextField {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 32px;
+}
+
+.iconTexField {
+  position: absolute;
+  margin: 10px;
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey);
+}
+
+.textField,
+.textFieldError {
+  width: 100%;
+  padding: 6px 15px; /* Use the smaller padding as default */
+  font-size: var(--body-font-regular-md);
+  border: 1px solid var(--color-borders);
+  border-radius: 8px;
+  background: var(--color-white);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  outline: none; /* Assuming you want to remove the outline in both cases */
+}
+
+.textFieldError {
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+.textField:focus {
+  box-shadow: none;
+}
+
+.textField:active {
+  border-color: rgba(99, 60, 255, 0.25);
+  box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .textField,
+  .textFieldError {
+    width: 50%; /* Apply the width change to both classes */
+    padding: 6px 30px; /* Larger padding on larger screens */
+  }
+}
