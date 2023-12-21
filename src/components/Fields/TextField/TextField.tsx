@@ -11,24 +11,30 @@ export const TextField = ({
   name,
   onChange,
   label,
-  isError = false,
+  isError,
   ...props
 }: ITextFieldProps): JSX.Element => {
   return (
     <div className={styles.containerTextField}>
-      {label && <label htmlFor={htmlFor}>{label}</label>}
-      {icon && <div className={styles.iconTexField}>{icon}</div>}
-      <input
-        id={htmlFor}
-        className={`${styles.textField} ${
-          isError ? styles.textFieldError : ''
-        }`}
-        type={type}
-        value={value}
-        name={name}
-        onChange={onChange}
-        {...props}
-      />
+      {label && (
+        <div>
+          <label htmlFor={htmlFor}>{label}</label>
+        </div>
+      )}
+      <div className={styles.containerInputTextField}>
+        {icon && <div className={styles.iconTexField}>{icon}</div>}
+        <input
+          id={htmlFor}
+          className={`${styles.textField} ${
+            isError ? styles.textFieldError : styles.textFieldNormal
+          }`}
+          type={type}
+          value={value}
+          name={name}
+          onChange={onChange}
+          {...props}
+        />
+      </div>
     </div>
   );
 };

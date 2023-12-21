@@ -17,6 +17,6 @@ export interface ITextFieldProps {
   maxLength?: number;
   size?: number;
   style?: React.CSSProperties;
-  icon?: ReactNode;
+  icon?: JSX.Element;
   placeholder?: string;
 }

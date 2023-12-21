@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { instrumentSans } from '@/ui/fonts';
+import { instrumentSans } from '@/fonts/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
