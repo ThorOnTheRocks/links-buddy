@@ -1,0 +1,12 @@
+.containerDropdownField {
+  position: relative;
+}
+
+.iconDropdownField {
+  position: absolute;
+  left: 0.6%;
+  top: 30%;
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey);
+}
