@@ -10,7 +10,7 @@ export const DropdownField = ({
   return (
     <div className={styles.containerTextField}>
       <div className={styles.containerInputTextField}>
-        {icon && <div className={styles.iconTexField}>{icon}</div>}
+        {icon && <div>{icon}</div>}
       </div>
     </div>
   );
