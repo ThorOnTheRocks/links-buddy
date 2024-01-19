@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import styles from './dropdown-field.module.css';
 import type { IDropdownFieldProps } from './DropdownField.types';
 import {
@@ -12,11 +12,32 @@ export const DropdownField = ({
   icon,
   dropdownData = ['Github', 'Facebook', 'Linkedin'],
 }: IDropdownFieldProps): JSX.Element => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggleDropdown = () => {
     setIsOpen((prev) => !prev);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   const dropdownFieldStateCSS = isOpen
     ? `${styles.containerDropdownField} ${styles.dropdownFieldOpen}`
     : styles.containerDropdownField;
@@ -34,6 +55,7 @@ export const DropdownField = ({
       <div
         className={dropdownFieldStateCSS}
         onClick={handleToggleDropdown}
+        ref={dropdownRef}
       >
         <div className={styles.containerDropdownFieldText}>
           {icon && (
