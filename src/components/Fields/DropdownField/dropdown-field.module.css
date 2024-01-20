@@ -11,6 +11,11 @@
   outline: none;
 }
 
+.dropdownFieldText {
+  font-size: var(--body-font-regular-md);
+  margin-left: 20px;
+}
+
 .iconDropdownField {
   position: absolute;
   left: 0.6%;
@@ -26,7 +31,7 @@
   top: 30%;
   width: 20px;
   height: 20px;
-  color: var(--color-grey);
+  color: var(--color-purple);
 }
 
 .containerDropdownFieldList {
@@ -35,12 +40,21 @@
   border: 1px solid var(--color-borders);
 }
 
-.dropdownFieldListItem {
+.dropdownFieldListItem > button {
+  display: flex;
+  align-items: center;
   margin: 10px 20px;
+  padding: 6px 0;
 }
 
 .dropdownFieldListItem:not(:last-child) {
   border-bottom: 1px solid var(--color-borders);
+}
+
+.dropdownFieldListItem:hover,
+.dropdownFieldListItem:active {
+  color: var(--color-purple);
+  cursor: pointer;
 }
 
 .dropdownFieldNormal {

@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import styles from './dropdown-field.module.css';
 import type { IDropdownFieldProps } from './DropdownField.types';
 import {
@@ -10,58 +10,58 @@ import {
 
 export const DropdownField = ({
   icon,
-  dropdownData = ['Github', 'Facebook', 'Linkedin'],
+  iconList,
+  dropdownData = ['Github', 'Linkedin', 'Facebook'],
+  placeholderText,
 }: IDropdownFieldProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [selectedItem, setSelectedItem] = useState<string>('');
 
-  const handleToggleDropdown = () => {
+  const handleToggleDropdown = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  const handleSelectedItem = (itemValue: string) => {
+    setSelectedItem(itemValue);
     setIsOpen((prev) => !prev);
   };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setIsOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen]);
 
   const dropdownFieldStateCSS = isOpen
     ? `${styles.containerDropdownField} ${styles.dropdownFieldOpen}`
     : styles.containerDropdownField;
 
-  const itemsListRendered = dropdownData.map((item, index) => (
-    <>
-      <li key={index} className={styles.dropdownFieldListItem}>
-        {item}
+  const itemsListRendered = dropdownData?.length ? (
+    dropdownData.map((item, index) => (
+      <li
+        key={`${item}-${index}`}
+        className={styles.dropdownFieldListItem}
+      >
+        <button
+          type="button"
+          onClick={() => handleSelectedItem(item)}
+        >
+          {iconList}
+          {item}
+        </button>
       </li>
-    </>
-  ));
+    ))
+  ) : (
+    <li className={styles.dropdownFieldListItem}>No Item</li>
+  );
 
   return (
     <>
       <div
         className={dropdownFieldStateCSS}
         onClick={handleToggleDropdown}
-        ref={dropdownRef}
       >
         <div className={styles.containerDropdownFieldText}>
           {icon && (
             <div className={styles.iconDropdownField}>{icon}</div>
           )}
-          <p>placeholder</p>
+          <p className={styles.dropdownFieldText}>
+            {selectedItem || placeholderText}
+          </p>
           <div className={styles.iconToggleDropdownField}>
             {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </div>
@@ -69,15 +69,7 @@ export const DropdownField = ({
       </div>
       {isOpen && (
         <div className={styles.containerDropdownFieldList}>
-          <ul>
-            {dropdownData.length ? (
-              itemsListRendered
-            ) : (
-              <li className={styles.dropdownFieldListItem}>
-                No Items
-              </li>
-            )}
-          </ul>
+          <ul>{itemsListRendered}</ul>
         </div>
       )}
     </>
