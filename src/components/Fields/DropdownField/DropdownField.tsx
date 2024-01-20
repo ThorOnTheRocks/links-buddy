@@ -1,18 +1,23 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import styles from './dropdown-field.module.css';
 import type { IDropdownFieldProps } from './DropdownField.types';
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 
 export const DropdownField = ({
+  className,
   icon,
   iconList,
-  dropdownData = ['Github', 'Linkedin', 'Facebook'],
-  placeholderText,
+  dropdownData,
+  name,
+  onSelect,
+  defaultValue = 'Set you text',
+  style,
 }: IDropdownFieldProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>('');
+  const hiddenInputRef = useRef(null);
 
   const handleToggleDropdown = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -20,6 +25,7 @@ export const DropdownField = ({
 
   const handleSelectedItem = (itemValue: string) => {
     setSelectedItem(itemValue);
+    onSelect(itemValue);
     setIsOpen((prev) => !prev);
   };
 
@@ -48,16 +54,24 @@ export const DropdownField = ({
 
   return (
     <>
+      <input
+        type="hidden"
+        ref={hiddenInputRef}
+        name={name}
+        value={selectedItem}
+      />
+
       <div
-        className={dropdownFieldStateCSS}
+        className={`${className} ${dropdownFieldStateCSS}`}
         onClick={handleToggleDropdown}
+        style={style}
       >
         <div className={styles.containerDropdownFieldText}>
           {icon && (
             <div className={styles.iconDropdownField}>{icon}</div>
           )}
           <p className={styles.dropdownFieldText}>
-            {selectedItem || placeholderText}
+            {selectedItem || defaultValue}
           </p>
           <button
             className={`${styles.iconToggleDropdownField} ${
