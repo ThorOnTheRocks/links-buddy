@@ -57,19 +57,6 @@
   cursor: pointer;
 }
 
-.dropdownFieldNormal {
-  border: 1px solid var(--color-borders);
-}
-
-.dropdownFieldError {
-  border: 1px solid var(--color-red);
-  color: var(--color-red);
-}
-
-.dropdownField:focus {
-  box-shadow: none;
-}
-
 .containerDropdownField:hover {
   cursor: pointer;
 }
@@ -80,8 +67,7 @@
 }
 
 @media (min-width: 768px) {
-  .dropdownField,
-  .dropdownFieldError {
+  .dropdownField {
     width: 50%;
     padding: 6px 30px;
   }
