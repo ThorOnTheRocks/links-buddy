@@ -12,7 +12,7 @@ export const DropdownField = ({
   dropdownData,
   name,
   onSelect,
-  defaultValue = 'Set you text',
+  defaultValue,
   style,
 }: IDropdownFieldProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
