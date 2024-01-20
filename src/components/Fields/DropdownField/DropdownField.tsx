@@ -3,10 +3,7 @@
 import { useCallback, useState } from 'react';
 import styles from './dropdown-field.module.css';
 import type { IDropdownFieldProps } from './DropdownField.types';
-import {
-  ChevronUpIcon,
-  ChevronDownIcon,
-} from '@heroicons/react/16/solid';
+import { ChevronDownIcon } from '@heroicons/react/16/solid';
 
 export const DropdownField = ({
   icon,
@@ -62,9 +59,15 @@ export const DropdownField = ({
           <p className={styles.dropdownFieldText}>
             {selectedItem || placeholderText}
           </p>
-          <div className={styles.iconToggleDropdownField}>
-            {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-          </div>
+          <button
+            className={`${styles.iconToggleDropdownField} ${
+              isOpen ? styles.iconToggleDropdownFieldOpen : ''
+            }`}
+            aria-haspopup="true"
+            aria-expanded={isOpen}
+          >
+            <ChevronDownIcon />
+          </button>
         </div>
       </div>
       {isOpen && (

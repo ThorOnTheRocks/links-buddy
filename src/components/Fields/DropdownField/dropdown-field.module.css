@@ -32,6 +32,11 @@
   width: 20px;
   height: 20px;
   color: var(--color-purple);
+  transition: transform 0.3s ease;
+}
+
+.iconToggleDropdownFieldOpen {
+  transform: rotate(180deg);
 }
 
 .containerDropdownFieldList {
