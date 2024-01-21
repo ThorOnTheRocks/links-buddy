@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './dropdown-field.module.css';
 import type { IDropdownFieldProps } from './DropdownField.types';
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
@@ -13,22 +13,52 @@ export const DropdownField = ({
   name,
   onSelect,
   placeholderText,
-  defaultValue,
   style,
 }: IDropdownFieldProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>('');
-  const hiddenInputRef = useRef(null);
+  const hiddenInputRef = useRef<HTMLInputElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleToggleDropdown = useCallback(() => {
-    setIsOpen((prev) => !prev);
+  const handleToggleDropdown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      setIsOpen((prev) => !prev);
+    },
+    []
+  );
+
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(e.target as Node)
+    ) {
+      setIsOpen((prev) => !prev);
+    }
   }, []);
 
-  const handleSelectedItem = (itemValue: string) => {
-    setSelectedItem(itemValue);
-    onSelect(itemValue);
-    setIsOpen((prev) => !prev);
-  };
+  const handleSelectedItem = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>, itemValue: string) => {
+      e.stopPropagation();
+      setSelectedItem(itemValue);
+      onSelect(itemValue);
+      setIsOpen((prev) => !prev);
+    },
+    [onSelect]
+  );
+
+  useEffect(() => {
+    const eventHandler = handleClickOutside as EventListener;
+    if (isOpen) {
+      document.addEventListener('click', eventHandler);
+    } else {
+      document.removeEventListener('click', eventHandler);
+    }
+
+    return () => {
+      document.removeEventListener('click', eventHandler);
+    };
+  }, [isOpen, handleClickOutside]);
 
   const dropdownFieldStateCSS = isOpen
     ? `${styles.containerDropdownField} ${styles.dropdownFieldOpen}`
@@ -42,7 +72,7 @@ export const DropdownField = ({
       >
         <button
           type="button"
-          onClick={() => handleSelectedItem(item)}
+          onClick={(e) => handleSelectedItem(e, item)}
         >
           {iconList}
           {item}
@@ -86,7 +116,10 @@ export const DropdownField = ({
         </div>
       </div>
       {isOpen && (
-        <div className={styles.containerDropdownFieldList}>
+        <div
+          className={styles.containerDropdownFieldList}
+          ref={dropdownRef}
+        >
           <ul>{itemsListRendered}</ul>
         </div>
       )}
