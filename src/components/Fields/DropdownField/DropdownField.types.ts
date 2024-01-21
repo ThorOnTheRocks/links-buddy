@@ -2,7 +2,7 @@ export interface IDropdownFieldProps {
   dropdownData: string[];
   onSelect: (selectedItem: string) => void;
   icon?: JSX.Element;
-  iconList?: JSX.Element[] | string;
+  iconList?: JSX.Element | string;
   placeholderText?: string;
   defaultValue?: string;
   ariaLabel?: string;

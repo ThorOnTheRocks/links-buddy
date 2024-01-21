@@ -12,6 +12,7 @@ export const DropdownField = ({
   dropdownData,
   name,
   onSelect,
+  placeholderText,
   defaultValue,
   style,
 }: IDropdownFieldProps): JSX.Element => {
@@ -71,7 +72,7 @@ export const DropdownField = ({
             <div className={styles.iconDropdownField}>{icon}</div>
           )}
           <p className={styles.dropdownFieldText}>
-            {selectedItem || defaultValue}
+            {selectedItem || placeholderText}
           </p>
           <button
             className={`${styles.iconToggleDropdownField} ${
