@@ -1,0 +1,72 @@
+.containerDropdownField {
+  position: relative;
+}
+
+.containerDropdownFieldText {
+  padding: 12px 15px;
+  font-size: var(--body-font-regular-md);
+  border-radius: 8px;
+  border: 1px solid var(--color-grey);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  outline: none;
+}
+
+.dropdownFieldText {
+  font-size: var(--body-font-regular-md);
+  margin-left: 20px;
+}
+
+.iconDropdownField {
+  position: absolute;
+  left: 0.6%;
+  top: 35%;
+  width: 16px;
+  height: 16px;
+  color: var(--color-grey);
+}
+
+.iconToggleDropdownField {
+  position: absolute;
+  right: 0.6%;
+  top: 30%;
+  width: 20px;
+  height: 20px;
+  color: var(--color-purple);
+  transition: transform 0.3s ease;
+}
+
+.iconToggleDropdownFieldOpen {
+  transform: rotate(180deg);
+}
+
+.containerDropdownFieldList {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-borders);
+}
+
+.dropdownFieldListItem > button {
+  display: flex;
+  align-items: center;
+  margin: 10px 20px;
+  padding: 6px 0;
+}
+
+.dropdownFieldListItem:not(:last-child) {
+  border-bottom: 1px solid var(--color-borders);
+}
+
+.dropdownFieldListItem:hover,
+.dropdownFieldListItem:active {
+  color: var(--color-purple);
+  cursor: pointer;
+}
+
+.containerDropdownField:hover {
+  cursor: pointer;
+}
+
+.dropdownFieldOpen {
+  border-color: rgba(99, 60, 255, 0.25);
+  box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+}
