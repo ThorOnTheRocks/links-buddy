@@ -9,17 +9,17 @@ const onSelect = jest.fn();
 describe('DropdownField component', () => {
   test('renders DropdownField with default value and options', () => {
     const dropdownData = ['Option 1', 'Option 2', 'Option 3'];
-    const defaultValue = 'Select an option';
+    const placeholderText = 'Select an option';
 
     render(
       <DropdownField
         dropdownData={dropdownData}
-        defaultValue={defaultValue}
+        placeholderText={placeholderText}
         onSelect={onSelect}
       />
     );
 
-    const placeholderElement = screen.getByText(defaultValue);
+    const placeholderElement = screen.getByText(placeholderText);
     expect(placeholderElement).toBeInTheDocument();
 
     dropdownData.forEach((option) => {
