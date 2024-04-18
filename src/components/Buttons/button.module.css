@@ -1,0 +1,28 @@
+.btn {
+  font-size: var(--body-font-regular-md);
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 8px;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.btnPrimary {
+  color: var(--color-white);
+  background-color: var(--color-purple);
+}
+
+.btnPrimary:active {
+  background-color: var(--color-purple-hover);
+  cursor: pointer;
+}
+
+.btnSecondary {
+  border: 1px solid var(--color-purple);
+  color: var(--color-purple);
+  background-color: var(--color-white);
+}
+
+.btnSecondary:active {
+  background-color: var(--color-purple-hover);
+  cursor: pointer;
+}
