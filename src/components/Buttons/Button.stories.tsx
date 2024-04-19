@@ -13,8 +13,8 @@ type Story = StoryObj<typeof Button>;
 export const ButtonPrimary: Story = {
   args: {
     variant: 'primary',
-    onClick: () => {},
     name: 'button-primary',
+    onClick: () => {},
     ariaLabel: 'button',
     children: 'Button Primary',
   },
@@ -24,9 +24,9 @@ export const ButtonPrimary: Story = {
 export const ButtonSecondary: Story = {
   args: {
     variant: 'secondary',
-    onClick: () => {},
     name: 'button-secondary',
     ariaLabel: 'button',
+    onClick: () => {},
     children: 'Button Secondary',
   },
   render: ({ ...args }) => <Button {...args} />,

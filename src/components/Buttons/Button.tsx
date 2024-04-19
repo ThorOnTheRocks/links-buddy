@@ -4,15 +4,28 @@ import styles from './button.module.css';
 
 const Button = ({
   children,
-  variant,
+  variant = 'primary',
   className,
+  onClick,
+  isDisabled = false,
   ...props
 }: IButtonProps): React.JSX.Element => {
-  const buttonClass =
-    variant === 'primary' ? styles.btnPrimary : styles.btnSecondary;
+  const buttonClass = isDisabled
+    ? variant === 'primary'
+      ? styles.btnPrimaryDisabled
+      : styles.btnSecondaryDisabled
+    : variant === 'primary'
+    ? styles.btnPrimary
+    : styles.btnSecondary;
 
   return (
-    <button className={`${styles.btn} ${buttonClass}`} {...props}>
+    <button
+      type="button"
+      disabled={isDisabled}
+      onClick={!isDisabled ? onClick : undefined}
+      className={`${styles.btn} ${buttonClass} ${className || ''}`}
+      {...props}
+    >
       {children}
     </button>
   );

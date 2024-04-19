@@ -13,7 +13,16 @@
 
 .btnPrimary:active {
   background-color: var(--color-purple-hover);
+  border-color: rgba(99, 60, 255, 0.25);
+  box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
   cursor: pointer;
+}
+
+.btnPrimaryDisabled {
+  color: var(--color-white);
+  background-color: var(--color-purple-hover);
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btnSecondary {
@@ -25,4 +34,12 @@
 .btnSecondary:active {
   background-color: var(--color-purple-hover);
   cursor: pointer;
+}
+
+.btnSecondaryDisabled {
+  opacity: 0.5;
+  background-color: var(--color-white);
+  color: var(--color-purple);
+  border: 1px solid var(--color-purple);
+  cursor: not-allowed;
 }
