@@ -10,12 +10,14 @@ export const TextField = ({
   icon,
   name,
   onChange,
+  placeholder,
   label,
   isError,
+  className,
   ...props
 }: ITextFieldProps): JSX.Element => {
   return (
-    <div className={styles.containerTextField}>
+    <>
       {label && (
         <div>
           <label htmlFor={htmlFor}>{label}</label>
@@ -25,7 +27,8 @@ export const TextField = ({
         {icon && <div className={styles.iconTexField}>{icon}</div>}
         <input
           id={htmlFor}
-          className={`${styles.textField} ${
+          placeholder={placeholder}
+          className={`${styles.textField} ${className} ${
             isError ? styles.textFieldError : styles.textFieldNormal
           }`}
           type={type}
@@ -35,6 +38,6 @@ export const TextField = ({
           {...props}
         />
       </div>
-    </div>
+    </>
   );
 };

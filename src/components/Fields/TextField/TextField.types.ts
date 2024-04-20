@@ -19,4 +19,5 @@ export interface ITextFieldProps {
   style?: React.CSSProperties;
   icon?: JSX.Element;
   placeholder?: string;
+  className?: string;
 }
