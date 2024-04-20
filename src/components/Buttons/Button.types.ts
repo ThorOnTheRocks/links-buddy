@@ -1,10 +1,7 @@
-export interface IButtonProps {
-  onClick: () => void;
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+export interface IButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary';
-  ariaLabel?: string;
-  className?: string;
-  style?: React.CSSProperties;
-  name?: string;
   children?: React.ReactNode;
   isDisabled?: boolean;
 }

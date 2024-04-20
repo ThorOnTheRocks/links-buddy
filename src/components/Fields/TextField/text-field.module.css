@@ -28,6 +28,14 @@
   color: var(--color-red);
 }
 
+.textFieldErrorText {
+  color: var(--color-red);
+  font-style: italic;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+}
+
 .textField:focus {
   box-shadow: none;
 }

@@ -8,6 +8,7 @@ const Button = ({
   className,
   onClick,
   isDisabled = false,
+  type,
   ...props
 }: IButtonProps): React.JSX.Element => {
   const buttonClass = isDisabled
@@ -20,7 +21,7 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type={type}
       disabled={isDisabled}
       onClick={!isDisabled ? onClick : undefined}
       className={`${styles.btn} ${buttonClass} ${className || ''}`}

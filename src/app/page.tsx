@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
-import EmailLanding from '@/widgets/EmailLanding/EmailLanding';
+import EmailLanding from '@/widgets/EmailSubscription/EmailSubscription.widget';
 import logoImgDevLinks from '../../public/assets/images/logo-devlinks-large.png';
 
 export default function Home(): ReactNode {
