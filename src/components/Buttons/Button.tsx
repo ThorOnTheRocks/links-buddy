@@ -2,7 +2,7 @@ import type { IButtonProps } from './Button.types';
 
 import styles from './button.module.css';
 
-const Button = ({
+export const Button = ({
   children,
   variant = 'primary',
   className,
@@ -31,5 +31,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;

@@ -1,33 +1,58 @@
 'use client';
 
+import { BaseSyntheticEvent, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { emailSubscriptionSchema } from '@/schema/emailSubscriptionSchema';
-import { TextField } from '@/components/Fields/TextField/TextField';
-import { saveEmailSubscription } from '@/actions/EmailSubscription/saveEmailSubscription';
-import Button from '@/components/Buttons/Button';
+import { createEmailSubscription } from '@/actions/EmailSubscription/createEmailSubscription';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import {
+  Button,
+  TextField,
+  Alert,
+  AlertTitle,
+  AlertDescription,
+} from '@/components';
+
 import styles from './email-subscription.module.css';
 
 import type { EmailSubscriptionForm } from './EmailSubscription.types';
-import { BaseSyntheticEvent, useRef } from 'react';
+import type { EmailSubscriptionFormState } from '@/actions/EmailSubscription/EmailSubscriptionState.types';
+
+const initialState: EmailSubscriptionFormState = {
+  message: '',
+  fields: {},
+  errors: undefined,
+  resetKey: Date.now().toString(),
+};
 
 const EmailSubscription = (): React.JSX.Element => {
-  const [state, formAction] = useFormState(saveEmailSubscription, {
-    message: '',
-  });
+  const [state, formAction] = useFormState(
+    createEmailSubscription,
+    initialState
+  );
+
+  console.log('form action: ', formAction);
+  console.log('message: ', state.message);
+  console.log('fields: ', state.fields);
+  console.log('form key: ', state.resetKey);
+  console.log('success: ', state.success);
+
   const {
-    register,
-    handleSubmit,
     formState: { errors },
+    handleSubmit,
+    register,
   } = useForm<EmailSubscriptionForm>({
     resolver: zodResolver(emailSubscriptionSchema),
-    mode: 'onChange',
+    mode: 'onSubmit',
     defaultValues: {
       email: '',
     },
-    ...(state.field ?? {}),
+    ...(state.fields ?? {}),
   });
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const onSubmit = (e: BaseSyntheticEvent) => {
     e.preventDefault();
@@ -36,33 +61,45 @@ const EmailSubscription = (): React.JSX.Element => {
     })(e);
   };
 
-  const formRef = useRef<HTMLFormElement>(null);
+  console.log('errors: ', state.errors);
 
   return (
     <>
-      {!state.message ? (
-        <form
-          ref={formRef}
-          action={formAction}
-          onSubmit={onSubmit}
-          className={styles.containerEmailField}
-        >
-          <TextField
-            {...register('email')}
-            type="email"
-            className={styles.emailFieldInput}
-            name="email"
-            placeholder="Email"
-            isError={Boolean(errors.email)}
-            error={errors.email?.message}
-          />
-          <Button type="submit" className={styles.emailSubmitBtn}>
-            Subscribe
-          </Button>
-        </form>
-      ) : (
-        <div>{state.message}</div>
-      )}
+      <div className="mt-10 w-1/3">
+        {state?.message && (
+          <Alert
+            variant={
+              Boolean(state.success) ? 'default' : 'destructive'
+            }
+          >
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>
+              {Boolean(state.success) ? 'Success' : 'Error'}
+            </AlertTitle>
+            <AlertDescription>{state.message}</AlertDescription>
+          </Alert>
+        )}
+      </div>
+      <form
+        key={state.resetKey}
+        ref={formRef}
+        action={formAction}
+        onSubmit={onSubmit}
+        className={styles.containerEmailField}
+      >
+        <TextField
+          {...register('email')}
+          type="email"
+          className={styles.emailFieldInput}
+          name="email"
+          placeholder="Email"
+          isError={Boolean(errors.email)}
+          error={errors.email?.message}
+        />
+        <Button type="submit" className={styles.emailSubmitBtn}>
+          Subscribe
+        </Button>
+      </form>
     </>
   );
 };
