@@ -4,6 +4,8 @@ import EmailLanding from '@/widgets/EmailSubscription/EmailSubscription.widget';
 import logoImgDevLinks from '../../../public/assets/images/logo-devlinks-large.png';
 
 export default function Home(): ReactNode {
+  console.log('DATABASE_URL:', process.env.DATABASE_URL);
+
   return (
     <main className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen flex flex-col items-center justify-center">
       <div className="mb-6">
