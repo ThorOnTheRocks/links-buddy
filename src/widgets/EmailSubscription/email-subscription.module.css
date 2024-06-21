@@ -1,13 +1,13 @@
 .containerEmailField {
   display: flex;
   justify-content: space-between;
-  margin: 40px;
+  margin: 0.5rem 2.5rem;
 }
 
 .emailFieldInput {
-  width: 480px;
-  height: 48px;
-  margin-right: 16px;
+  width: 30rem;
+  height: 3rem;
+  margin-right: 1rem;
 }
 
 .emailSubmitBtn {

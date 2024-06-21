@@ -1,6 +1,11 @@
 'use client';
 
-import { BaseSyntheticEvent, useRef } from 'react';
+import {
+  BaseSyntheticEvent,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import { useFormState } from 'react-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -28,21 +33,17 @@ const initialState: EmailSubscriptionFormState = {
 };
 
 const EmailSubscription = (): React.JSX.Element => {
-  const [state, formAction] = useFormState(
-    createEmailSubscription,
-    initialState
-  );
-
-  console.log('form action: ', formAction);
-  console.log('message: ', state.message);
-  console.log('fields: ', state.fields);
-  console.log('form key: ', state.resetKey);
-  console.log('success: ', state.success);
+  const [state, formAction] = useFormState<
+    EmailSubscriptionFormState,
+    FormData
+  >(createEmailSubscription, initialState);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const {
     formState: { errors },
     handleSubmit,
     register,
+    reset,
   } = useForm<EmailSubscriptionForm>({
     resolver: zodResolver(emailSubscriptionSchema),
     mode: 'onSubmit',
@@ -58,15 +59,25 @@ const EmailSubscription = (): React.JSX.Element => {
     e.preventDefault();
     handleSubmit(() => {
       formAction(new FormData(formRef.current!));
+      setShowAlert(!showAlert);
+      reset({ email: '' });
     })(e);
   };
 
-  console.log('errors: ', state.errors);
+  useEffect(() => {
+    if (showAlert) {
+      const timeout = setTimeout(() => {
+        setShowAlert(!showAlert);
+      }, 3000);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [showAlert]);
 
   return (
     <>
       <div className="mt-10 w-1/3">
-        {state?.message && (
+        {showAlert && (
           <Alert
             variant={
               Boolean(state.success) ? 'default' : 'destructive'

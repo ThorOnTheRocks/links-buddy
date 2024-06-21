@@ -4,27 +4,27 @@
 
 .iconTexField {
   position: absolute;
-  left: 0.6%;
+  left: 0.375%;
   top: 30%;
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
   color: var(--color-grey);
 }
 
 .textField {
-  padding: 6px 15px;
+  padding: 0.375rem 0.9375rem;
   font-size: var(--body-font-regular-md);
-  border-radius: 8px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   outline: none;
 }
 
 .textFieldNormal {
-  border: 1px solid var(--color-borders);
+  border: 0.0625rem solid var(--color-borders);
 }
 
 .textFieldError {
-  border: 1px solid var(--color-red);
+  border: 0.0625rem solid var(--color-red);
   color: var(--color-red);
 }
 
@@ -32,7 +32,7 @@
   color: var(--color-red);
   font-style: italic;
   font-size: 0.875rem;
-  margin-top: 4px;
+  margin-top: 0.25rem;
   display: block;
 }
 
@@ -42,13 +42,13 @@
 
 .textField:active {
   border-color: rgba(99, 60, 255, 0.25);
-  box-shadow: 0px 0px 32px 0px rgba(99, 60, 255, 0.25);
+  box-shadow: 0rem 0rem 2rem 0rem rgba(99, 60, 255, 0.25);
   cursor: pointer;
 }
 
 @media (min-width: 768px) {
   .textField,
   .textFieldError {
-    padding: 6px 30px;
+    padding: 0.375rem 1.875rem;
   }
 }

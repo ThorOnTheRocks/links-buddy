@@ -13,6 +13,8 @@
   --body-font-regular-md: 16px;
   --heading-font-bold-sm: 16px;
   --heading-font-bold-md: 32px;
+
+  font-size: 16px;
 }
 
 @media (min-width: 768px) {

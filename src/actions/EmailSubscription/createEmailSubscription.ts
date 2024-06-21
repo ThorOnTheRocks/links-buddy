@@ -10,11 +10,8 @@ export async function createEmailSubscription(
   prevState: EmailSubscriptionFormState,
   data: FormData
 ): Promise<EmailSubscriptionFormState> {
-  console.log('data: ', data);
   const formData = Object.fromEntries(data);
-  console.log('form data: ', formData);
   const parsedData = emailSubscriptionSchema.safeParse(formData);
-  console.log('parsed data: ', parsedData);
 
   if (!parsedData.success) {
     const fields: Record<string, string> = {};
@@ -52,7 +49,6 @@ export async function createEmailSubscription(
         };
       }
     }
-    console.error('Error while subscribing:', error);
     return {
       success: false,
       message:
