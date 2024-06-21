@@ -21,7 +21,7 @@ export default function Home(): ReactNode {
         The best link sharing platform for engineers, hackers, and
         developers is coming soon...
       </p>
-      <p className="text-lg">
+      <p className="text-lg mb-4">
         Get notified with an exclusive gift and discount subscription!
       </p>
       <EmailLanding />

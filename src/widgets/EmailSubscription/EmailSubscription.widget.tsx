@@ -59,7 +59,7 @@ const EmailSubscription = (): React.JSX.Element => {
     e.preventDefault();
     handleSubmit(() => {
       formAction(new FormData(formRef.current!));
-      setShowAlert(!showAlert);
+      setShowAlert(true);
       reset({ email: '' });
     })(e);
   };
@@ -67,7 +67,7 @@ const EmailSubscription = (): React.JSX.Element => {
   useEffect(() => {
     if (showAlert) {
       const timeout = setTimeout(() => {
-        setShowAlert(!showAlert);
+        setShowAlert(false);
       }, 3000);
 
       return () => clearTimeout(timeout);
@@ -76,7 +76,10 @@ const EmailSubscription = (): React.JSX.Element => {
 
   return (
     <>
-      <div className="mt-10 w-1/3">
+      <div
+        className="mt-10 w-1/3"
+        style={{ position: 'absolute', top: 0 }}
+      >
         {showAlert && (
           <Alert
             variant={
