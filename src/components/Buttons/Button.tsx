@@ -2,12 +2,13 @@ import type { IButtonProps } from './Button.types';
 
 import styles from './button.module.css';
 
-const Button = ({
+export const Button = ({
   children,
   variant = 'primary',
   className,
   onClick,
   isDisabled = false,
+  type,
   ...props
 }: IButtonProps): React.JSX.Element => {
   const buttonClass = isDisabled
@@ -20,7 +21,7 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type={type}
       disabled={isDisabled}
       onClick={!isDisabled ? onClick : undefined}
       className={`${styles.btn} ${buttonClass} ${className || ''}`}
@@ -30,5 +31,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;

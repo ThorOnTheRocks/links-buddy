@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import Button from './Button';
+import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
   title: 'Buttons/Button',
@@ -15,7 +15,7 @@ export const ButtonPrimary: Story = {
     variant: 'primary',
     name: 'button-primary',
     onClick: () => {},
-    ariaLabel: 'button',
+    'aria-label': 'button',
     children: 'Button Primary',
   },
   render: ({ ...args }) => <Button {...args} />,
@@ -25,7 +25,7 @@ export const ButtonSecondary: Story = {
   args: {
     variant: 'secondary',
     name: 'button-secondary',
-    ariaLabel: 'button',
+    'aria-label': 'button',
     onClick: () => {},
     children: 'Button Secondary',
   },

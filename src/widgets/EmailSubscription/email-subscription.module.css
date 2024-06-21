@@ -1,0 +1,16 @@
+.containerEmailField {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem 2.5rem;
+}
+
+.emailFieldInput {
+  width: 30rem;
+  height: 3rem;
+  margin-right: 1rem;
+}
+
+.emailSubmitBtn {
+  align-self: start;
+  width: 100%;
+}

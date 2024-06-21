@@ -2,21 +2,14 @@ import {
   HTMLInputTypeAttribute,
   ChangeEventHandler,
   ReactNode,
+  InputHTMLAttributes,
 } from 'react';
 
-export interface ITextFieldProps {
-  type: HTMLInputTypeAttribute;
-  name: string;
-  value: string;
-  htmlFor?: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+export interface ITextFieldProps
+  extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  isError?: boolean;
-  isRequired?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  size?: number;
-  style?: React.CSSProperties;
+  htmlFor?: string;
   icon?: JSX.Element;
-  placeholder?: string;
+  isError?: boolean;
+  error?: string;
 }
