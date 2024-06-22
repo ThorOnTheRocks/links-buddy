@@ -5,6 +5,7 @@ import {
   useState,
   useEffect,
   useRef,
+  Suspense,
 } from 'react';
 import { useFormState } from 'react-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -22,14 +23,24 @@ import {
 
 import styles from './email-subscription.module.css';
 
-import type { EmailSubscriptionForm } from './EmailSubscription.types';
+import type {
+  EmailSubscriptionForm,
+  EmailSubscriptionAlertState,
+} from './EmailSubscription.types';
 import type { EmailSubscriptionFormState } from '@/actions/EmailSubscription/EmailSubscriptionState.types';
 
 const initialState: EmailSubscriptionFormState = {
   message: '',
   fields: {},
   errors: undefined,
-  resetKey: Date.now().toString(),
+  resetKey: '',
+};
+
+const initialAlertState: EmailSubscriptionAlertState = {
+  show: false,
+  type: 'default',
+  title: '',
+  message: '',
 };
 
 const EmailSubscription = (): React.JSX.Element => {
@@ -37,7 +48,8 @@ const EmailSubscription = (): React.JSX.Element => {
     EmailSubscriptionFormState,
     FormData
   >(createEmailSubscription, initialState);
-  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [alert, setAlert] =
+    useState<EmailSubscriptionAlertState>(initialAlertState);
 
   const {
     formState: { errors },
@@ -55,24 +67,48 @@ const EmailSubscription = (): React.JSX.Element => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = (e: BaseSyntheticEvent) => {
+  const onSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
     handleSubmit(() => {
       formAction(new FormData(formRef.current!));
-      setShowAlert(true);
       reset({ email: '' });
     })(e);
   };
 
   useEffect(() => {
-    if (showAlert) {
+    if (state.message) {
+      if (state.status === 'error') {
+        setAlert((prev) => ({
+          ...prev,
+          show: true,
+          type: 'destructive',
+          title: 'Error',
+          message: state.message,
+        }));
+      } else {
+        setAlert((prev) => ({
+          ...prev,
+          show: true,
+          type: 'default',
+          title: 'Success',
+          message: state.message,
+        }));
+      }
+    }
+  }, [state.status, state.message]);
+
+  useEffect(() => {
+    if (alert.show) {
       const timeout = setTimeout(() => {
-        setShowAlert(false);
+        setAlert({
+          ...alert,
+          show: false,
+        });
       }, 3000);
 
       return () => clearTimeout(timeout);
     }
-  }, [showAlert]);
+  }, [alert.show]);
 
   return (
     <>
@@ -80,17 +116,11 @@ const EmailSubscription = (): React.JSX.Element => {
         className="mt-10 w-1/3"
         style={{ position: 'absolute', top: 0 }}
       >
-        {showAlert && (
-          <Alert
-            variant={
-              Boolean(state.success) ? 'default' : 'destructive'
-            }
-          >
+        {alert.show && (
+          <Alert variant={alert.type}>
             <ExclamationTriangleIcon className="h-4 w-4" />
-            <AlertTitle>
-              {Boolean(state.success) ? 'Success' : 'Error'}
-            </AlertTitle>
-            <AlertDescription>{state.message}</AlertDescription>
+            <AlertTitle>{alert.title}</AlertTitle>
+            <AlertDescription>{alert.message}</AlertDescription>
           </Alert>
         )}
       </div>

@@ -1,6 +1,6 @@
 export type EmailSubscriptionFormState = {
   message: string;
-  success?: boolean;
+  status?: 'success' | 'error' | 'loading' | 'idle';
   fields?: Record<string, string>;
   errors?: string[];
   resetKey?: string;
