@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { EmailSubscriptionSchema } from '@/schema/EmailSubscriptionSchema';
 import {
-  saveEmailSubscription,
   type EmailSubscriptionFormState,
+  saveEmailSubscription,
 } from './action';
 import { Button, TextField, Alert } from '@/components';
 
