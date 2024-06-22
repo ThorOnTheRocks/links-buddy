@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const emailSubscriptionSchema = z
+export const EmailSubscriptionSchema = z
   .object({
     email: z
       .string()

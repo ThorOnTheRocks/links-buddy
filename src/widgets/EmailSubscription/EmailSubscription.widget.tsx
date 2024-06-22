@@ -1,55 +1,41 @@
 'use client';
 
-import {
-  BaseSyntheticEvent,
-  useState,
-  useEffect,
-  useRef,
-  Suspense,
-} from 'react';
+import { BaseSyntheticEvent, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { emailSubscriptionSchema } from '@/schema/emailSubscriptionSchema';
-import { createEmailSubscription } from '@/actions/EmailSubscription/createEmailSubscription';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { EmailSubscriptionSchema } from '@/schema/EmailSubscriptionSchema';
 import {
-  Button,
-  TextField,
-  Alert,
-  AlertTitle,
-  AlertDescription,
-} from '@/components';
+  saveEmailSubscription,
+  type EmailSubscriptionFormState,
+} from './action';
+import { Button, TextField, Alert } from '@/components';
 
 import styles from './email-subscription.module.css';
 
-import type {
-  EmailSubscriptionForm,
-  EmailSubscriptionAlertState,
-} from './EmailSubscription.types';
-import type { EmailSubscriptionFormState } from '@/actions/EmailSubscription/EmailSubscriptionState.types';
+import type { EmailSubscriptionForm } from './EmailSubscription.types';
+import { useAlert } from '@/components/Alert';
 
 const initialState: EmailSubscriptionFormState = {
   message: '',
+  status: 'idle',
   fields: {},
   errors: undefined,
-  resetKey: '',
-};
-
-const initialAlertState: EmailSubscriptionAlertState = {
-  show: false,
-  type: 'default',
-  title: '',
-  message: '',
+  timestamp: 0,
 };
 
 const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction] = useFormState<
     EmailSubscriptionFormState,
     FormData
-  >(createEmailSubscription, initialState);
-  const [alert, setAlert] =
-    useState<EmailSubscriptionAlertState>(initialAlertState);
+  >(saveEmailSubscription, initialState);
+
+  const alert = useAlert({
+    message: state.message,
+    status: state.status,
+    timestamp: state.timestamp,
+    duration: 4000,
+  });
 
   const {
     formState: { errors },
@@ -57,7 +43,7 @@ const EmailSubscription = (): React.JSX.Element => {
     register,
     reset,
   } = useForm<EmailSubscriptionForm>({
-    resolver: zodResolver(emailSubscriptionSchema),
+    resolver: zodResolver(EmailSubscriptionSchema),
     mode: 'onSubmit',
     defaultValues: {
       email: '',
@@ -75,57 +61,13 @@ const EmailSubscription = (): React.JSX.Element => {
     })(e);
   };
 
-  useEffect(() => {
-    if (state.message) {
-      if (state.status === 'error') {
-        setAlert((prev) => ({
-          ...prev,
-          show: true,
-          type: 'destructive',
-          title: 'Error',
-          message: state.message,
-        }));
-      } else {
-        setAlert((prev) => ({
-          ...prev,
-          show: true,
-          type: 'default',
-          title: 'Success',
-          message: state.message,
-        }));
-      }
-    }
-  }, [state.status, state.message]);
-
-  useEffect(() => {
-    if (alert.show) {
-      const timeout = setTimeout(() => {
-        setAlert({
-          ...alert,
-          show: false,
-        });
-      }, 3000);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [alert.show]);
-
   return (
     <>
-      <div
-        className="mt-10 w-1/3"
-        style={{ position: 'absolute', top: 0 }}
-      >
-        {alert.show && (
-          <Alert variant={alert.type}>
-            <ExclamationTriangleIcon className="h-4 w-4" />
-            <AlertTitle>{alert.title}</AlertTitle>
-            <AlertDescription>{alert.message}</AlertDescription>
-          </Alert>
-        )}
+      <div className="absolute top-32">
+        <Alert alert={alert} />
       </div>
       <form
-        key={state.resetKey}
+        key={state.timestamp}
         ref={formRef}
         action={formAction}
         onSubmit={onSubmit}

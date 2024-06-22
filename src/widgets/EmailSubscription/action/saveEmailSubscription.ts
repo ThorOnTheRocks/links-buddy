@@ -1,17 +1,17 @@
 'use server';
 
-import { emailSubscriptionSchema } from '@/schema/emailSubscriptionSchema';
 import prisma from '@/db';
+import { Prisma } from '@prisma/client';
+import { EmailSubscriptionSchema } from '@/schema/EmailSubscriptionSchema';
 
 import type { EmailSubscriptionFormState } from './EmailSubscriptionState.types';
-import { Prisma } from '@prisma/client';
 
-export async function createEmailSubscription(
+export async function saveEmailSubscription(
   prevState: EmailSubscriptionFormState,
   data: FormData
 ): Promise<EmailSubscriptionFormState> {
   const formData = Object.fromEntries(data);
-  const parsedData = emailSubscriptionSchema.safeParse(formData);
+  const parsedData = EmailSubscriptionSchema.safeParse(formData);
 
   if (!parsedData.success) {
     const fields: Record<string, string> = {};
@@ -23,7 +23,7 @@ export async function createEmailSubscription(
       message: 'Invalid form data',
       fields,
       errors: Object.values(fields).flat(),
-      resetKey: '',
+      timestamp: Date.now(),
     };
   }
 
@@ -35,8 +35,9 @@ export async function createEmailSubscription(
     });
     return {
       status: 'success',
+      errors: [],
       message: 'Congratulations! You have successfully subscribed 🎉',
-      resetKey: Date.now().toString(),
+      timestamp: Date.now(),
     };
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -47,7 +48,7 @@ export async function createEmailSubscription(
             'This email is already registered in our database!',
           fields: {},
           errors: ['Email is already in use'],
-          resetKey: '',
+          timestamp: Date.now(),
         };
       }
     }
@@ -59,7 +60,7 @@ export async function createEmailSubscription(
           : 'Something went wrong!',
       fields: {},
       errors: [],
-      resetKey: '',
+      timestamp: Date.now(),
     };
   }
 }

@@ -1,7 +1,9 @@
+import type { Status } from '@/types/common.types';
+
 export type EmailSubscriptionFormState = {
   message: string;
-  status?: 'success' | 'error' | 'loading' | 'idle';
+  status: Status;
   fields?: Record<string, string>;
   errors?: string[];
-  resetKey?: string;
+  timestamp: number;
 };

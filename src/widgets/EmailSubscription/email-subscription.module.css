@@ -14,3 +14,18 @@
   align-self: start;
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .containerEmailField {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    width: 80%;
+  }
+
+  .emailFieldInput {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.6rem;
+  }
+}
