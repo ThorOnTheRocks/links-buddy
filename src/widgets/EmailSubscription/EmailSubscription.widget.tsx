@@ -4,7 +4,7 @@ import { BaseSyntheticEvent, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { EmailSubscriptionSchema } from '@/schema/EmailSubscriptionSchema';
+import { EmailSubscriptionSchema } from '../../schema/EmailSubscriptionSchema';
 import {
   type EmailSubscriptionFormState,
   saveEmailSubscription,

@@ -2,7 +2,7 @@
 
 import prisma from '@/db';
 import { Prisma } from '@prisma/client';
-import { EmailSubscriptionSchema } from '@/schema/EmailSubscriptionSchema';
+import { EmailSubscriptionSchema } from '../../../schema/EmailSubscriptionSchema';
 
 import type { EmailSubscriptionFormState } from './EmailSubscriptionState.types';
 
