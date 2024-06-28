@@ -1,6 +1,6 @@
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { AlertUI, AlertTitle, AlertDescription } from '../index';
-import { AlertState } from './hooks/useAlert.types';
+import type { AlertState } from './hooks/useAlert.types';
 
 type AlertProps = {
   alert: AlertState;
