@@ -1,4 +1,5 @@
 import { Button } from './Buttons/Button';
+import { SubmitButton } from './SubmitButton/SubmitButton';
 import { DropdownField } from './Fields/DropdownField/DropdownField';
 import { TextField } from './Fields/TextField/TextField';
 import { Alert } from './Alert';
@@ -16,4 +17,5 @@ export {
   AlertUI,
   AlertTitle,
   AlertDescription,
+  SubmitButton,
 };

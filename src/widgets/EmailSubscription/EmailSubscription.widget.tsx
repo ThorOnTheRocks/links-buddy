@@ -1,6 +1,6 @@
 'use client';
 
-import { BaseSyntheticEvent, useRef } from 'react';
+import { BaseSyntheticEvent, useRef, useTransition } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,7 +9,7 @@ import {
   type EmailSubscriptionFormState,
   saveEmailSubscription,
 } from './action';
-import { Button, TextField, Alert } from '@/components';
+import { TextField, Alert, SubmitButton } from '@/components';
 
 import styles from './email-subscription.module.css';
 
@@ -29,6 +29,7 @@ const EmailSubscription = (): React.JSX.Element => {
     EmailSubscriptionFormState,
     FormData
   >(saveEmailSubscription, initialState);
+  const [isPending, startTransition] = useTransition();
 
   const alert = useAlert({
     message: state.message,
@@ -56,8 +57,9 @@ const EmailSubscription = (): React.JSX.Element => {
   const onSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
     handleSubmit(() => {
-      formAction(new FormData(formRef.current!));
-      reset({ email: '' });
+      startTransition(async () => {
+        await formAction(new FormData(formRef.current!));
+      });
     })(e);
   };
 
@@ -73,18 +75,23 @@ const EmailSubscription = (): React.JSX.Element => {
         onSubmit={onSubmit}
         className={styles.containerEmailField}
       >
-        <TextField
-          {...register('email')}
-          type="email"
-          className={styles.emailFieldInput}
-          name="email"
-          placeholder="Email"
-          isError={Boolean(errors.email)}
-          error={errors.email?.message}
-        />
-        <Button type="submit" className={styles.emailSubmitBtn}>
+        <div>
+          <TextField
+            {...register('email')}
+            type="email"
+            className={styles.emailFieldInput}
+            name="email"
+            placeholder="Email"
+            isError={Boolean(errors.email)}
+            error={errors.email?.message}
+          />
+        </div>
+        <SubmitButton
+          isPending={isPending}
+          className={styles.emailSubmitBtn}
+        >
           Subscribe
-        </Button>
+        </SubmitButton>
       </form>
     </>
   );

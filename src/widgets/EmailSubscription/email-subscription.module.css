@@ -11,7 +11,11 @@
 }
 
 .emailSubmitBtn {
+  display: flex;
+  justify-content: center;
   align-self: start;
+  min-width: 143px;
+  min-height: 51px;
   width: 100%;
 }
 
@@ -27,5 +31,14 @@
     width: 100%;
     margin-right: 0;
     margin-bottom: 0.6rem;
+  }
+
+  .emailSubmitBtn {
+    display: flex;
+    justify-content: center;
+    align-self: start;
+    min-width: 143px;
+    min-height: 51px;
+    width: 100%;
   }
 }
