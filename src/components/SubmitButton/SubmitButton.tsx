@@ -17,6 +17,7 @@ export const SubmitButton = ({
   return (
     <>
       <Button
+        tabIndex={0}
         type="submit"
         disabled={isPending}
         className={className}

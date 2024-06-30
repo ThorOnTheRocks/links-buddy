@@ -18,6 +18,10 @@
   cursor: pointer;
 }
 
+.btnPrimary:focus {
+  border-color: rgba(147, 197, 229, 0.25);
+}
+
 .btnPrimaryDisabled {
   color: var(--color-white);
   background-color: var(--color-purple-hover);
@@ -34,6 +38,10 @@
 .btnSecondary:active {
   background-color: var(--color-purple-hover);
   cursor: pointer;
+}
+
+.btnSecondary:focus {
+  border-color: rgba(99, 60, 255, 0.25);
 }
 
 .btnSecondaryDisabled {

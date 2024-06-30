@@ -60,6 +60,7 @@ const EmailSubscription = (): React.JSX.Element => {
       startTransition(async () => {
         await formAction(new FormData(formRef.current!));
       });
+      reset({ email: '' });
     })(e);
   };
 
@@ -78,6 +79,8 @@ const EmailSubscription = (): React.JSX.Element => {
         <div>
           <TextField
             {...register('email')}
+            tabIndex={0}
+            aria-label="user-email"
             type="email"
             className={styles.emailFieldInput}
             name="email"
