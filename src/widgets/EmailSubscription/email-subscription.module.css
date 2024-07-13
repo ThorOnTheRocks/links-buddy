@@ -1,22 +1,23 @@
 .containerEmailField {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0.5rem 2.5rem;
 }
 
 .emailFieldInput {
-  width: 30rem;
+  min-width: 28rem;
   height: 3rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
 }
 
 .emailSubmitBtn {
   display: flex;
   justify-content: center;
   align-self: start;
-  min-width: 143px;
+  min-width: 28rem;
   min-height: 51px;
-  width: 100%;
 }
 
 @media (max-width: 768px) {

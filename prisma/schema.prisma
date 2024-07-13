@@ -12,5 +12,6 @@ datasource db {
 model EmailSubscription {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
+  firstName String
   email     String   @unique
 }

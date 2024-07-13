@@ -7,7 +7,7 @@ import { EmailSubscriptionSchema } from '../../../schema/EmailSubscriptionSchema
 import type { EmailSubscriptionFormState } from './EmailSubscriptionState.types';
 
 export async function saveEmailSubscription(
-  prevState: EmailSubscriptionFormState,
+  formState: EmailSubscriptionFormState,
   data: FormData
 ): Promise<EmailSubscriptionFormState> {
   const formData = Object.fromEntries(data);
@@ -15,14 +15,14 @@ export async function saveEmailSubscription(
 
   if (!parsedData.success) {
     const fields: Record<string, string> = {};
-    for (const key of Object.keys(fields)) {
+    for (const key of Object.keys(formData)) {
       fields[key] = formData[key].toString();
     }
     return {
       status: 'error',
       message: 'Invalid form data',
       fields,
-      errors: Object.values(fields).flat(),
+      errors: parsedData.error.errors.map((error) => error.message),
       timestamp: Date.now(),
     };
   }
@@ -30,6 +30,7 @@ export async function saveEmailSubscription(
   try {
     await prisma?.emailSubscription.create({
       data: {
+        firstName: parsedData.data.name,
         email: parsedData.data.email,
       },
     });
@@ -42,11 +43,11 @@ export async function saveEmailSubscription(
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
+        console.log({ formState });
         return {
           status: 'error',
           message:
             'This email is already registered in our database!',
-          fields: {},
           errors: ['Email is already in use'],
           timestamp: Date.now(),
         };
@@ -58,7 +59,6 @@ export async function saveEmailSubscription(
         error instanceof Error
           ? error.message
           : 'Something went wrong!',
-      fields: {},
       errors: [],
       timestamp: Date.now(),
     };

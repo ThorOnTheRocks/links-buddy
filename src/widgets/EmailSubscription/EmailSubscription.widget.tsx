@@ -1,6 +1,6 @@
 'use client';
 
-import { BaseSyntheticEvent, useRef, useTransition } from 'react';
+import { useRef, useTransition } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,12 +15,12 @@ import styles from './email-subscription.module.css';
 
 import type { EmailSubscriptionForm } from './EmailSubscription.types';
 import { useAlert } from '@/components/Alert';
+import { sendEmail } from '@/actions/sendEmail/sendEmail';
 
 const initialState: EmailSubscriptionFormState = {
   message: '',
   status: 'idle',
-  fields: {},
-  errors: undefined,
+  errors: [],
   timestamp: 0,
 };
 
@@ -47,22 +47,29 @@ const EmailSubscription = (): React.JSX.Element => {
     resolver: zodResolver(EmailSubscriptionSchema),
     mode: 'onSubmit',
     defaultValues: {
+      name: '',
       email: '',
     },
-    ...(state.fields ?? {}),
   });
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = async (e: BaseSyntheticEvent) => {
-    e.preventDefault();
-    handleSubmit(() => {
-      startTransition(async () => {
-        await formAction(new FormData(formRef.current!));
-      });
-      reset({ email: '' });
-    })(e);
-  };
+  const onSubmit = handleSubmit(async () => {
+    const formData = new FormData(formRef.current!);
+    const name = formData.get('name')?.toString();
+    const email = formData.get('email')?.toString();
+    startTransition(async () => {
+      console.log({ email: formData.get('email')?.toString() });
+
+      await formAction(formData);
+      reset({ name: '', email: '' });
+    });
+    if (state.status === 'success') {
+      await sendEmail(email as string);
+    }
+  });
+
+  console.log({ state });
 
   return (
     <>
@@ -77,6 +84,17 @@ const EmailSubscription = (): React.JSX.Element => {
         className={styles.containerEmailField}
       >
         <div>
+          <TextField
+            {...register('name')}
+            tabIndex={0}
+            aria-label="user-firstName"
+            type="firstName"
+            className={styles.emailFieldInput}
+            name="firstName"
+            placeholder="First Name"
+            isError={Boolean(errors.name)}
+            error={errors.name?.message}
+          />
           <TextField
             {...register('email')}
             tabIndex={0}
