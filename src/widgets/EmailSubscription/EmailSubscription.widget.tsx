@@ -62,11 +62,11 @@ const EmailSubscription = (): React.JSX.Element => {
       console.log({ email: formData.get('email')?.toString() });
 
       await formAction(formData);
-      reset({ name: '', email: '' });
     });
     if (state.status === 'success') {
       await sendEmail(email as string);
     }
+    reset({ name: '', email: '' });
   });
 
   console.log({ state });
@@ -88,10 +88,10 @@ const EmailSubscription = (): React.JSX.Element => {
             {...register('name')}
             tabIndex={0}
             aria-label="user-firstName"
-            type="firstName"
+            type="text"
             className={styles.emailFieldInput}
-            name="firstName"
-            placeholder="First Name"
+            name="name"
+            placeholder="Enter your name..."
             isError={Boolean(errors.name)}
             error={errors.name?.message}
           />
