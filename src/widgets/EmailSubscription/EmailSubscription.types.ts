@@ -1,4 +1,4 @@
 export type EmailSubscriptionForm = {
-  name: string;
+  firstName: string;
   email: string;
 };
