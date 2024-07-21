@@ -6,3 +6,10 @@ export type EmailSubscriptionFormState = {
   errors?: {};
   timestamp: number;
 };
+
+export const initialFormState: EmailSubscriptionFormState = {
+  message: '',
+  status: 'idle',
+  errors: [],
+  timestamp: 0,
+};

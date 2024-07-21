@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useTransition } from 'react';
+import { useRef, useEffect, useTransition } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,6 +8,7 @@ import { EmailSubscriptionSchema } from '../../schema/EmailSubscriptionSchema';
 import {
   type EmailSubscriptionFormState,
   createEmailSubscription,
+  initialFormState,
 } from './action';
 import { TextField, Alert, SubmitButton } from '@/components';
 
@@ -15,20 +16,16 @@ import styles from './email-subscription.module.css';
 
 import type { EmailSubscriptionForm } from './EmailSubscription.types';
 import { useAlert } from '@/components/Alert';
-
-const initialState: EmailSubscriptionFormState = {
-  message: '',
-  status: 'idle',
-  errors: [],
-  timestamp: 0,
-};
+import { sendEmail } from '@/actions/sendEmail';
 
 const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction] = useFormState<
     EmailSubscriptionFormState,
     FormData
-  >(createEmailSubscription, initialState);
+  >(createEmailSubscription, initialFormState);
   const [isPending, startTransition] = useTransition();
+
+  console.log({ state });
 
   const alert = useAlert({
     message: state.message,
@@ -49,21 +46,20 @@ const EmailSubscription = (): React.JSX.Element => {
       firstName: '',
       email: '',
     },
+    ...(state.errors ?? {}),
   });
 
   const formRef = useRef<HTMLFormElement>(null);
 
   const onSubmit = handleSubmit(async () => {
-    const formData = new FormData(formRef.current!);
     startTransition(async () => {
-      console.log({ email: formData.get('email')?.toString() });
-
-      await formAction(formData);
+      if (formRef.current) {
+        const formData = new FormData(formRef.current!);
+        await formAction(formData);
+      }
     });
     reset({ firstName: '', email: '' });
   });
-
-  console.log({ state });
 
   return (
     <>

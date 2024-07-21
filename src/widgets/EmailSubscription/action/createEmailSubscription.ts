@@ -7,7 +7,9 @@ import {
   toFormState,
 } from '../utils/toFormState';
 
-import type { EmailSubscriptionFormState } from '../models/EmailSubscription.types';
+import type { EmailSubscriptionFormState } from './EmailSubscription.types';
+import { ZodError } from 'zod';
+import { sendEmail } from '@/actions/sendEmail';
 
 export async function createEmailSubscription(
   formState: EmailSubscriptionFormState,
@@ -17,25 +19,19 @@ export async function createEmailSubscription(
   const parsedData = EmailSubscriptionSchema.safeParse(formData);
 
   if (!parsedData.success) {
-    const errors: Record<string, string> = {};
-    for (const key of Object.keys(formData)) {
-      errors[key] = formData[key].toString();
-    }
-    return {
-      status: 'error',
-      message: 'Invalid form data',
-      errors,
-      timestamp: Date.now(),
-    };
+    return fromErrorToFormState(
+      new ZodError(parsedData.error.errors)
+    );
   }
 
   try {
-    await prisma?.emailSubscription.create({
+    const response = await prisma.emailSubscription.create({
       data: {
         firstName: parsedData.data.firstName,
         email: parsedData.data.email,
       },
     });
+    await sendEmail(response.email, response.firstName);
     return toFormState(
       'success',
       'Congrats! You have successfully subscribed'
