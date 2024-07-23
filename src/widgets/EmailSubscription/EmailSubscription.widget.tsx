@@ -1,13 +1,14 @@
 'use client';
 
-import { BaseSyntheticEvent, useRef, useTransition } from 'react';
+import { useRef, useEffect, useTransition } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EmailSubscriptionSchema } from '../../schema/EmailSubscriptionSchema';
 import {
   type EmailSubscriptionFormState,
-  saveEmailSubscription,
+  createEmailSubscription,
+  initialFormState,
 } from './action';
 import { TextField, Alert, SubmitButton } from '@/components';
 
@@ -16,20 +17,14 @@ import styles from './email-subscription.module.css';
 import type { EmailSubscriptionForm } from './EmailSubscription.types';
 import { useAlert } from '@/components/Alert';
 
-const initialState: EmailSubscriptionFormState = {
-  message: '',
-  status: 'idle',
-  fields: {},
-  errors: undefined,
-  timestamp: 0,
-};
-
 const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction] = useFormState<
     EmailSubscriptionFormState,
     FormData
-  >(saveEmailSubscription, initialState);
+  >(createEmailSubscription, initialFormState);
   const [isPending, startTransition] = useTransition();
+
+  console.log({ state });
 
   const alert = useAlert({
     message: state.message,
@@ -47,22 +42,23 @@ const EmailSubscription = (): React.JSX.Element => {
     resolver: zodResolver(EmailSubscriptionSchema),
     mode: 'onSubmit',
     defaultValues: {
+      firstName: '',
       email: '',
     },
-    ...(state.fields ?? {}),
+    ...(state.errors ?? {}),
   });
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = async (e: BaseSyntheticEvent) => {
-    e.preventDefault();
-    handleSubmit(() => {
-      startTransition(async () => {
-        await formAction(new FormData(formRef.current!));
-      });
-      reset({ email: '' });
-    })(e);
-  };
+  const onSubmit = handleSubmit(async () => {
+    startTransition(async () => {
+      if (formRef.current) {
+        const formData = new FormData(formRef.current!);
+        await formAction(formData);
+      }
+    });
+    reset({ firstName: '', email: '' });
+  });
 
   return (
     <>
@@ -77,6 +73,17 @@ const EmailSubscription = (): React.JSX.Element => {
         className={styles.containerEmailField}
       >
         <div>
+          <TextField
+            {...register('firstName')}
+            tabIndex={0}
+            aria-label="user-firstName"
+            type="text"
+            className={styles.emailFieldInput}
+            name="firstName"
+            placeholder="Enter your name..."
+            isError={Boolean(errors.firstName)}
+            error={errors.firstName?.message}
+          />
           <TextField
             {...register('email')}
             tabIndex={0}

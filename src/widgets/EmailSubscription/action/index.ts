@@ -1,4 +1,11 @@
-import { saveEmailSubscription } from './saveEmailSubscription';
-import type { EmailSubscriptionFormState } from './EmailSubscriptionState.types';
+import { createEmailSubscription } from './createEmailSubscription';
+import {
+  type EmailSubscriptionFormState,
+  initialFormState,
+} from './EmailSubscription.types';
 
-export { saveEmailSubscription, type EmailSubscriptionFormState };
+export {
+  createEmailSubscription,
+  type EmailSubscriptionFormState,
+  initialFormState,
+};
