@@ -16,7 +16,6 @@ import styles from './email-subscription.module.css';
 
 import type { EmailSubscriptionForm } from './EmailSubscription.types';
 import { useAlert } from '@/components/Alert';
-import { sendEmail } from '@/actions/sendEmail';
 
 const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction] = useFormState<

@@ -4,14 +4,14 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model EmailSubscription {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  firstName String
   email     String   @unique
+  firstName String
 }
