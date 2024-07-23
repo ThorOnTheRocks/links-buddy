@@ -27,11 +27,11 @@ export async function createEmailSubscription(
   try {
     const response = await prisma.emailSubscription.create({
       data: {
-        firstName: parsedData.data.firstName,
+        first_name: parsedData.data.firstName,
         email: parsedData.data.email,
       },
     });
-    await sendEmail(response.email, response.firstName);
+    await sendEmail(response.email, response.first_name);
     return toFormState(
       'success',
       'Congrats! You have successfully subscribed'

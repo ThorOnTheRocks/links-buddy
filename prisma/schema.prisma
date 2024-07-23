@@ -10,8 +10,8 @@ datasource db {
 }
 
 model EmailSubscription {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  firstName String
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  email      String   @unique
+  first_name String
 }
