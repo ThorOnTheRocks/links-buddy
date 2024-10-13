@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { instrumentSans } from '@/fonts/fonts';
+import { instrumentSans } from '../fonts/fonts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={instrumentSans.className}>{children}</body>
+    <html lang="en" className={instrumentSans.className}>
+      <body>{children}</body>
     </html>
   );
 }

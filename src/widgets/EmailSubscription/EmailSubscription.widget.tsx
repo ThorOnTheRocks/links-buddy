@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useTransition } from 'react';
+import { useRef, useTransition } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,8 +23,6 @@ const EmailSubscription = (): React.JSX.Element => {
     FormData
   >(createEmailSubscription, initialFormState);
   const [isPending, startTransition] = useTransition();
-
-  console.log({ state });
 
   const alert = useAlert({
     message: state.message,
@@ -54,7 +52,8 @@ const EmailSubscription = (): React.JSX.Element => {
     startTransition(async () => {
       if (formRef.current) {
         const formData = new FormData(formRef.current!);
-        await formAction(formData);
+        const data = await formAction(formData);
+        return data;
       }
     });
     reset({ firstName: '', email: '' });
@@ -62,9 +61,6 @@ const EmailSubscription = (): React.JSX.Element => {
 
   return (
     <>
-      <div className="absolute top-32">
-        <Alert alert={alert} />
-      </div>
       <form
         key={state.timestamp}
         ref={formRef}
@@ -72,6 +68,7 @@ const EmailSubscription = (): React.JSX.Element => {
         onSubmit={onSubmit}
         className={styles.containerEmailField}
       >
+        <Alert alert={alert} className="mb-4" />
         <div>
           <TextField
             {...register('firstName')}

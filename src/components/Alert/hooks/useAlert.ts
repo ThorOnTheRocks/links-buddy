@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import type { Status } from '@/types/common.types';
 import type { AlertState } from './useAlert.types';
