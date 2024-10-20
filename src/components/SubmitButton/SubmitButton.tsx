@@ -6,7 +6,7 @@ import { Icons } from '../Icons/Icons';
 interface ILoadingButton {
   isPending: boolean;
   children: React.ReactNode;
-  className?: string;
+  className?: string | undefined;
 }
 
 export const SubmitButton = ({

@@ -1,9 +1,4 @@
-import {
-  HTMLInputTypeAttribute,
-  ChangeEventHandler,
-  ReactNode,
-  InputHTMLAttributes,
-} from 'react';
+import { InputHTMLAttributes } from 'react';
 
 export interface ITextFieldProps
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -11,5 +6,5 @@ export interface ITextFieldProps
   htmlFor?: string;
   icon?: JSX.Element;
   isError?: boolean;
-  error?: string;
+  error?: string | undefined;
 }
