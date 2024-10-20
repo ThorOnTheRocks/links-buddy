@@ -9,13 +9,14 @@ export default function SubscribePage(): ReactNode {
       <div className="container mx-auto px-4 py-12">
         <header className="text-center mb-12">
           <Image
-            src={'/logo-devlinks-large.svg'}
-            alt="DevLinks Logo"
-            width={250}
-            height={250}
-            className="mx-auto mb-6"
+            priority
+            src={'/LinksBuddy Logo High-Res.svg'}
+            alt="links buddy Logo"
+            width={800}
+            height={800}
+            className="mx-auto m-10"
           />
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
             Your Ultimate Link Sharing Platform
           </h1>
           <p className="text-xl text-gray-600 mb-8">
@@ -50,13 +51,13 @@ export default function SubscribePage(): ReactNode {
           />
           <FeatureCard
             title="Discover Resources"
-            description="Explore curated collections from other developers"
+            description="Explore curated collections from other users"
             icon="🔍"
           />
         </section>
 
         <footer className="text-center text-gray-600">
-          <p>&copy; 2024 DevLinks. All rights reserved.</p>
+          <p>&copy; 2024 LinksBuddy. All rights reserved.</p>
         </footer>
       </div>
     </main>

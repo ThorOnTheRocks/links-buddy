@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useTransition } from 'react';
+import { useEffect, useRef, useTransition } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -48,16 +48,20 @@ const EmailSubscription = (): React.JSX.Element => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = handleSubmit(async () => {
+  const onSubmit = handleSubmit(() => {
     startTransition(async () => {
       if (formRef.current) {
         const formData = new FormData(formRef.current!);
-        const data = await formAction(formData);
-        return data;
+        await formAction(formData);
       }
     });
-    reset({ firstName: '', email: '' });
   });
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      reset({ firstName: '', email: '' });
+    }
+  }, [state, reset]);
 
   return (
     <>
@@ -77,7 +81,7 @@ const EmailSubscription = (): React.JSX.Element => {
             type="text"
             className={styles.emailFieldInput}
             name="firstName"
-            placeholder="Enter your name..."
+            placeholder="Name"
             isError={Boolean(errors.firstName)}
             error={errors.firstName?.message}
           />

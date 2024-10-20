@@ -40,7 +40,9 @@
 }
 
 .textField:focus {
-  box-shadow: none;
+  border-color: rgba(99, 60, 255, 0.25);
+  box-shadow: 0rem 0rem 2rem 0rem rgba(99, 60, 255, 0.25);
+  cursor: pointer;
 }
 
 .textField:active {

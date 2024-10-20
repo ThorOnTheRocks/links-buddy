@@ -11,6 +11,6 @@ export async function sendEmail(email: string, firstName: string) {
     to: [email],
     subject: `Hello ${firstName}`,
     react: EmailTemplate({ firstName }),
-    text: 'Congrats for subscribing to DevLinks!',
+    text: 'Congrats for subscribing to LinksBuddy!',
   });
 }
