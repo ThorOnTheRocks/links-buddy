@@ -12,7 +12,7 @@ import { ZodError } from 'zod';
 import { sendEmail } from '@/actions/sendEmail';
 
 export async function createEmailSubscription(
-  formState: EmailSubscriptionFormState,
+  _formState: EmailSubscriptionFormState,
   data: FormData
 ): Promise<EmailSubscriptionFormState> {
   const formData = Object.fromEntries(data);

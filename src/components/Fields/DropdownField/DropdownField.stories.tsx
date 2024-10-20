@@ -17,7 +17,7 @@ const DropdownFieldWithHooks = ({
   onSelect,
   ...props
 }: IDropdownFieldProps) => {
-  const [selectedItem, setSelectedItem] = useState('');
+  const [, setSelectedItem] = useState('');
 
   const handleSelectItem = (itemValue: string) => {
     setSelectedItem(itemValue);
