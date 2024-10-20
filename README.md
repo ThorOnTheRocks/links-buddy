@@ -1,6 +1,6 @@
-# Dev-Links
+# LinksBuddy
 
-Dev-Links is a dynamic link sharing application designed for developers to share, organize, and discover valuable coding resources. Built with Next.js, React, TypeScript, and integrated with Prisma and PostgreSQL, this platform offers a user-friendly interface for developers to manage links, engage in discussions, and personalize their profiles.
+LinksBuddy is a dynamic link sharing application designed for developers to share, organize, and discover valuable coding resources. Built with Next.js, React, TypeScript, and integrated with Prisma and PostgreSQL, this platform offers a user-friendly interface for developers to manage links, engage in discussions, and personalize their profiles.
 
 ## Tech Stack
 
