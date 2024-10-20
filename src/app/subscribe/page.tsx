@@ -17,21 +17,19 @@ export default function SubscribePage(): ReactNode {
             className="mx-auto m-10"
           />
           <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
-            Your Ultimate Link Sharing Platform
+            Discover, Share, and Organize Links Like Never Before
           </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Create, organize, and share your developer resources with
-            ease
-          </p>
         </header>
 
         <section className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-8 mb-12">
           <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-            Join the Waitlist
+            Join the LinksBuddy community
           </h2>
           <p className="text-gray-600 mb-6 text-center">
-            Be the first to know when we launch and get exclusive
-            early access!
+            Revolutionize the way you manage your online resources.
+            <br></br>
+            Share knowledge, curate collections, and connect with
+            like-minded individuals.
           </p>
           <div className="flex justify-center">
             <EmailLanding />
@@ -40,19 +38,19 @@ export default function SubscribePage(): ReactNode {
 
         <section className="grid md:grid-cols-3 gap-8 mb-12">
           <FeatureCard
-            title="Organize Your Links"
-            description="Create custom collections for different topics or projects"
-            icon="📚"
-          />
-          <FeatureCard
-            title="Share with Ease"
-            description="Generate shareable links for your collections"
+            title="Curate Collections"
+            description="Organize your favorite links into public or private collections"
             icon="🔗"
           />
           <FeatureCard
-            title="Discover Resources"
-            description="Explore curated collections from other users"
-            icon="🔍"
+            title="Connect with Others"
+            description="Discover new resources and collaborate with the community"
+            icon="🍻"
+          />
+          <FeatureCard
+            title="AI-Powered Insights"
+            description="Get personalized recommendations and trending topics"
+            icon="⚡️"
           />
         </section>
 

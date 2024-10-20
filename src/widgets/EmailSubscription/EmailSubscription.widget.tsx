@@ -101,7 +101,7 @@ const EmailSubscription = (): React.JSX.Element => {
           isPending={isPending}
           className={styles.emailSubmitBtn}
         >
-          Subscribe
+          Get early access
         </SubmitButton>
       </form>
     </>
