@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={instrumentSans.className}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" sizes="32x32" href="/favicon.ico" />
         <link
           rel="icon"
           type="image/png"
