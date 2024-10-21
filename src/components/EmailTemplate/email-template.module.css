@@ -1,0 +1,96 @@
+.emailBody {
+  background-color: var(--color-light-grey);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Ubuntu, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  background-color: var(--color-white);
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 40px; /* Increased side padding */
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 30px;
+  max-width: 150px;
+}
+
+.heading {
+  color: var(--color-dark-grey);
+  font-size: var(--heading-font-bold-sm);
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.text {
+  color: var(--color-grey);
+  font-size: var(--body-font-regular-md);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.bulletPoints {
+  margin: 32px 0;
+}
+
+.ctaContainer {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.button {
+  background-color: var(--color-purple);
+  border-radius: var(--radius);
+  color: var(--color-white);
+  display: inline-block;
+  font-size: var(--body-font-regular-md);
+  font-weight: bold;
+  padding: 12px 24px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--color-purple-hover);
+}
+
+.footer {
+  border-top: 1px solid var(--color-borders);
+  margin-top: 40px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.footerText {
+  color: var(--color-grey);
+  font-size: var(--body-font-regular-sm);
+  margin-bottom: 10px;
+}
+
+.socialLink {
+  color: var(--color-purple);
+  display: inline-block;
+  font-size: var(--body-font-regular-sm);
+  margin: 0 8px;
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  color: var(--color-purple-hover);
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: var(--heading-font-bold-md);
+  }
+
+  .text {
+    font-size: var(--body-font-regular-md);
+  }
+}
