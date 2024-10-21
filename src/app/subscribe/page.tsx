@@ -10,7 +10,7 @@ export default function SubscribePage(): ReactNode {
         <header className="text-center mb-12">
           <Image
             priority
-            src={'/LinksBuddy Logo High-Res.svg'}
+            src={'/assets/LinksBuddy Logo High-Res.svg'}
             alt="links buddy Logo"
             width={800}
             height={800}
