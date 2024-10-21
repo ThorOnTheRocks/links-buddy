@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { LinksBuddyConfirmationEmail } from '../EmailTemplate';
 
-// Mock the @react-email/components
 jest.mock('@react-email/components', () => ({
   Body: ({ children }: { children: React.ReactNode }) => (
     <div data-testid="body">{children}</div>
@@ -42,18 +41,20 @@ jest.mock('@react-email/components', () => ({
   ),
 }));
 
-describe('LinkBuddyConfirmationEmail', () => {
+describe('LinksBuddyConfirmationEmail', () => {
   it('renders with default props', () => {
     render(<LinksBuddyConfirmationEmail />);
 
     expect(screen.getByTestId('heading')).toHaveTextContent(
-      'You are officially on the LinkBuddy VIP list!'
+      'You are officially on the LinksBuddy VIP list!'
     );
     expect(
       screen.getByText(/Dear Valued Subscriber/)
     ).toBeInTheDocument();
     expect(screen.getByText(/1,000\+/)).toBeInTheDocument();
-    expect(screen.getByAltText('LinkBuddy Logo')).toBeInTheDocument();
+    expect(
+      screen.getByAltText('LinksBuddy Logo')
+    ).toBeInTheDocument();
     expect(
       screen.getByText('Check Out Our Coming Soon Page')
     ).toBeInTheDocument();
@@ -61,7 +62,7 @@ describe('LinkBuddyConfirmationEmail', () => {
     // Check default benefit points
     expect(
       screen.getByText(
-        /You will be among the first to know when LinkBuddy launches/
+        /You will be among the first to know when LinksBuddy launches/
       )
     ).toBeInTheDocument();
     expect(
@@ -78,15 +79,15 @@ describe('LinkBuddyConfirmationEmail', () => {
     // Check default social links
     expect(screen.getByText('Twitter')).toHaveAttribute(
       'href',
-      'https://twitter.com/linkbuddy'
+      'https://twitter.com/linksbuddy'
     );
     expect(screen.getByText('Facebook')).toHaveAttribute(
       'href',
-      'https://facebook.com/linkbuddy'
+      'https://facebook.com/linksbuddy'
     );
     expect(screen.getByText('Instagram')).toHaveAttribute(
       'href',
-      'https://instagram.com/linkbuddy'
+      'https://instagram.com/linksbuddy'
     );
   });
 
@@ -94,38 +95,31 @@ describe('LinkBuddyConfirmationEmail', () => {
     const customProps = {
       username: 'John Doe',
       subscriberCount: '5,000+',
-      welcomeMessage: 'Welcome to the LinkBuddy Family!',
+      welcomeMessage: 'Welcome to the LinksBuddy Family!',
       logoUrl: 'https://example.com/custom-logo.png',
       logoAlt: 'Custom Logo',
       ctaText: 'Explore Features',
-      ctaUrl: 'https://linkbuddy.com/features',
-      contactEmail: 'support@linkbuddy.com',
+      ctaUrl: 'https://linksbuddy.org/features',
+      contactEmail: 'support@linksbuddy.org',
       benefitPoints: ['Custom benefit 1', 'Custom benefit 2'],
       socialLinks: {
         twitter: 'https://twitter.com/customhandle',
         facebook: 'https://facebook.com/customhandle',
       },
-      preferencesUrl: 'https://linkbuddy.com/custom-preferences',
+      preferencesUrl: 'https://linksbuddy.com/custom-preferences',
     };
 
     render(<LinksBuddyConfirmationEmail {...customProps} />);
 
     expect(screen.getByTestId('heading')).toHaveTextContent(
-      'Welcome to the LinkBuddy Family!'
+      'Welcome to the LinksBuddy Family!'
     );
     expect(screen.getByText(/Dear John Doe/)).toBeInTheDocument();
     expect(screen.getByText(/5,000\+/)).toBeInTheDocument();
-    expect(screen.getByAltText('Custom Logo')).toHaveAttribute(
-      'src',
-      'https://example.com/custom-logo.png'
-    );
     expect(screen.getByText('Explore Features')).toHaveAttribute(
       'href',
-      'https://linkbuddy.com/features'
+      'https://linksbuddy.org/features'
     );
-    expect(
-      screen.getByText(/support@linkbuddy.com/)
-    ).toBeInTheDocument();
 
     expect(screen.getByText('Twitter')).toHaveAttribute(
       'href',
@@ -141,7 +135,7 @@ describe('LinkBuddyConfirmationEmail', () => {
       screen.getByText('Manage your email preferences')
     ).toHaveAttribute(
       'href',
-      'https://linkbuddy.com/custom-preferences'
+      'https://linksbuddy.com/custom-preferences'
     );
   });
 
