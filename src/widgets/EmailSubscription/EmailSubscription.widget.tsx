@@ -40,7 +40,6 @@ const EmailSubscription = (): React.JSX.Element => {
     resolver: zodResolver(EmailSubscriptionSchema),
     mode: 'onSubmit',
     defaultValues: {
-      firstName: '',
       email: '',
     },
     ...(state.errors ?? {}),
@@ -59,52 +58,44 @@ const EmailSubscription = (): React.JSX.Element => {
 
   useEffect(() => {
     if (state.status === 'success') {
-      reset({ firstName: '', email: '' });
+      reset({ email: '' });
     }
   }, [state, reset]);
 
   return (
-    <>
-      <form
-        key={state.timestamp}
-        ref={formRef}
-        action={formAction}
-        onSubmit={onSubmit}
-        className={styles.containerEmailField}
-      >
-        <Alert alert={alert} className="mb-4" />
-        <div>
-          <TextField
-            {...register('firstName')}
-            tabIndex={0}
-            aria-label="user-firstName"
-            type="text"
-            className={styles.emailFieldInput}
-            name="firstName"
-            placeholder="Name"
-            isError={Boolean(errors.firstName)}
-            error={errors.firstName?.message}
-          />
-          <TextField
-            {...register('email')}
-            tabIndex={0}
-            aria-label="user-email"
-            type="email"
-            className={styles.emailFieldInput}
-            name="email"
-            placeholder="Email"
-            isError={Boolean(errors.email)}
-            error={errors.email?.message}
-          />
-        </div>
-        <SubmitButton
-          isPending={isPending}
-          className={styles.emailSubmitBtn}
+    <div>
+      <Alert alert={alert} className="mb-4" />
+
+      <section className={styles.containerEmailField}>
+        <form
+          key={state.timestamp}
+          ref={formRef}
+          action={formAction}
+          onSubmit={onSubmit}
         >
-          Get early access
-        </SubmitButton>
-      </form>
-    </>
+          <div className={styles.inputWrapper}>
+            <TextField
+              {...register('email')}
+              tabIndex={0}
+              aria-label="user-email"
+              type="email"
+              className={styles.emailFieldInput}
+              name="email"
+              placeholder="Enter your email"
+              isError={Boolean(errors?.email)}
+              error={errors?.email?.message}
+            />
+
+            <SubmitButton
+              isPending={isPending}
+              className={styles.emailSubmitBtn}
+            >
+              Get early access
+            </SubmitButton>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@
 
 import { Button } from '../Buttons/Button';
 import { Icons } from '../Icons/Icons';
+import styles from './submit-button.module.css';
 
 interface ILoadingButton {
   isPending: boolean;
@@ -24,7 +25,9 @@ export const SubmitButton = ({
       >
         {isPending ? (
           <>
-            <Icons.spinner className="mr-2 h-6 w-6 animate-spin text-center" />
+            <Icons.spinner
+              className={`${styles.submitBtnIcon} ${styles.spinner} w-8 h-8 mr-2`}
+            />
           </>
         ) : (
           <>{children}</>

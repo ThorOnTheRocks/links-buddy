@@ -8,7 +8,7 @@
   top: 30%;
   width: 1rem;
   height: 1rem;
-  color: var(--color-grey);
+  color: var(--color-neutral-600);
 }
 
 .textField {
@@ -20,34 +20,32 @@
 }
 
 .textFieldNormal {
-  border: 0.0625rem solid var(--color-borders);
+  border: 0.0625rem solid var(--color-neutral-200);
 }
 
 .textFieldError {
-  border: 0.0625rem solid var(--color-red);
-  color: var(--color-red);
+  border: 0.0625rem solid var(--color-error);
+  color: var(--color-error);
 }
 
 .textFieldErrorText {
-  position: absolute;
-  top: 0.7rem;
-  right: 0.6rem;
-  color: var(--color-red);
+  color: var(--color-error);
   font-style: italic;
   font-size: 0.875rem;
   margin-top: 0.25rem;
-  display: block;
+  align-items: start;
+  display: flex;
 }
 
 .textField:focus {
-  border-color: rgba(99, 60, 255, 0.25);
-  box-shadow: 0rem 0rem 2rem 0rem rgba(99, 60, 255, 0.25);
+  border-color: var(--color-primary-hover);
+  box-shadow: 0rem 0rem 2rem 0rem var(--color-primary-hover);
   cursor: pointer;
 }
 
 .textField:active {
-  border-color: rgba(99, 60, 255, 0.25);
-  box-shadow: 0rem 0rem 2rem 0rem rgba(99, 60, 255, 0.25);
+  border-color: var(--color-primary-dark);
+  box-shadow: 0rem 0rem 2rem 0rem var(--color-primary-hover);
   cursor: pointer;
 }
 

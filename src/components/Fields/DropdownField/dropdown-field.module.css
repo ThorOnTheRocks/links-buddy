@@ -6,7 +6,7 @@
   padding: 0.75rem 0.9375rem;
   font-size: var(--body-font-regular-md);
   border-radius: 0.5rem;
-  border: 0.0625rem solid var(--color-grey);
+  border: 0.0625rem solid var(--color-neutral-600);
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   outline: none;
 }
@@ -22,7 +22,7 @@
   top: 33%;
   width: 1.2rem;
   height: 1.2rem;
-  color: var(--color-grey);
+  color: var(--color-neutral-600);
 }
 
 .iconToggleDropdownField {
@@ -31,7 +31,7 @@
   top: 30%;
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--color-purple);
+  color: var(--color-primary);
   transition: transform 0.3s ease;
 }
 
@@ -42,7 +42,7 @@
 .containerDropdownFieldList {
   margin-top: 0.625rem;
   border-radius: 0.5rem;
-  border: 0.0625rem solid var(--color-borders);
+  border: 0.0625rem solid var(--color-neutral-200);
 }
 
 .dropdownFieldListItem > button {
@@ -53,12 +53,12 @@
 }
 
 .dropdownFieldListItem:not(:last-child) {
-  border-bottom: 0.0625rem solid var(--color-borders);
+  border-bottom: 0.0625rem solid var(--color-neutral-200);
 }
 
 .dropdownFieldListItem:hover,
 .dropdownFieldListItem:active {
-  color: var(--color-purple);
+  color: var(--color-primary);
   cursor: pointer;
 }
 
