@@ -41,7 +41,7 @@ export const EmailContent: React.FC<
 }) => {
   const fullLogoUrl = logoUrl
     ? `${baseUrl}${logoUrl}`
-    : `${baseUrl}/assets/LinksBuddy-logo-high-res.png`;
+    : `${baseUrl}/assets/Logo Files/svg/logo-no-brackground.svg`;
 
   return (
     <Body className={styles.emailBody}>

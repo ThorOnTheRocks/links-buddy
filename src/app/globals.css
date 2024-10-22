@@ -5,16 +5,29 @@
 @layer base {
   :root {
     /* Custom variables */
-    --color-purple: #633cff;
-    --color-purple-hover: #beadff;
-    --color-light-purple: #efebff;
-    --color-dark-grey: #333333;
-    --color-grey: #737373;
-    --color-borders: #d9d9d9;
-    --color-light-grey: #fafafa;
-    --color-white: #ffffff;
-    --color-red: #ff3939;
+    /* Primary Colors */
+    --color-primary: #ff851c; /* Base orange */
+    --color-primary-hover: #ff9b45; /* Lighter for hover - more luminous */
+    --color-primary-light: #fff0e6; /* Very light background */
+    --color-primary-dark: #e66d00; /* Darker for active states */
 
+    /* Secondary Colors */
+    --color-secondary: #ffc168; /* Warm gold */
+    --color-secondary-hover: #ffd48f; /* Lighter gold */
+    --color-secondary-light: #fff6e8; /* Very light gold */
+
+    /* Neutral Colors */
+    --color-neutral-900: #362f2d; /* Darkest - for text */
+    --color-neutral-600: #776e6a; /* Medium - for secondary text */
+    --color-neutral-200: #d8d0cc; /* Light - for borders */
+    --color-neutral-100: #faf7f6; /* Lightest - for backgrounds */
+    --color-neutral-0: #ffffff; /* Pure white */
+
+    /* Feedback Colors */
+    --color-error: #ff4d36; /* Error states */
+    --color-success: #a3b899; /* Success states */
+
+    /* Typography Scale */
     --body-font-regular-sm: 12px;
     --body-font-regular-md: 16px;
     --heading-font-bold-sm: 16px;
