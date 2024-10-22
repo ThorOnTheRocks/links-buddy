@@ -105,9 +105,14 @@ export default function LandingPage(): ReactNode {
               </ul>
             </div>
             <div className={styles.aiVisual}>
-              <div className={styles.aiIllustration}>
-                {/* Placeholder for illustration/screenshot */}
-              </div>
+              <Image
+                priority
+                className={styles.aiIllustration}
+                src="/assets/ai-features.png"
+                alt="ai features links buddy"
+                width={400}
+                height={400}
+              />
             </div>
           </div>
         </div>
