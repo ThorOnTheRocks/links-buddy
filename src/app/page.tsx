@@ -1,11 +1,12 @@
-import { ReactNode } from 'react';
+import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
-export default function Home(): ReactNode {
-  return (
-    <main className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen flex flex-col items-center justify-center">
-      <div className="mb-6">
-        <h1>LinksBuddy</h1>
-      </div>
-    </main>
-  );
+export const metadata: Metadata = {
+  title: 'LinksBuddy - Smart Link Management',
+  description:
+    'Discover a smarter way to manage your links. Powered by AI, designed for simplicity, built for professionals.',
+};
+
+export default function Home() {
+  redirect('/subscribe');
 }

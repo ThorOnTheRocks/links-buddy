@@ -1,15 +1,22 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 import {
   Link,
   BarChart2,
   Shield,
   Zap,
   Globe,
-  PartyPopper,
+  Rocket,
 } from 'lucide-react';
 import EmailLanding from '@/widgets/EmailSubscription/EmailSubscription.widget';
-import styles from './landing-page.module.css';
+import styles from './subscribe-page.module.css';
+
+export const metadata: Metadata = {
+  title: 'LinksBuddy - Smart Link Management',
+  description:
+    'Discover a smarter way to manage your links. Powered by AI, designed for simplicity, built for professionals.',
+};
 
 export default function LandingPage(): ReactNode {
   return (
@@ -40,7 +47,7 @@ export default function LandingPage(): ReactNode {
             <div className={styles.heroForm}>
               <EmailLanding />
               <p className={styles.formHint}>
-                <PartyPopper className={styles.partyPopper} />
+                <Rocket className={styles.Rocket} />
                 Join now and get premium features for free
               </p>
             </div>
@@ -90,7 +97,7 @@ export default function LandingPage(): ReactNode {
                 {aiFeatures.map((feature, index) => (
                   <li key={index} className={styles.aiFeatureItem}>
                     <span className={styles.checkIcon}>
-                      <PartyPopper />
+                      <Rocket />
                     </span>
                     {feature}
                   </li>
@@ -166,7 +173,7 @@ const features = [
     title: 'AI Insights',
     description:
       'Smart recommendations and automated optimizations for your links.',
-    icon: <PartyPopper />,
+    icon: <Rocket />,
   },
 ];
 
