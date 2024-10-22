@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "prisma generate && next build",
     "start": "next start",
     "test": "jest",
@@ -23,11 +23,11 @@
     "clsx": "^2.1.0",
     "init": "^0.1.2",
     "lucide-react": "^0.92.0",
-    "next": "^14.2.15",
+    "next": "15.0.0",
     "pg": "^8.11.5",
     "prisma": "^5.12.1",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "19.0.0-rc-65a56d0e-20241020",
+    "react-dom": "19.0.0-rc-65a56d0e-20241020",
     "react-hook-form": "^7.51.3",
     "resend": "^3.4.0",
     "storybook": "^7.6.6",
@@ -53,12 +53,12 @@
     "@types/jest": "^29.5.11",
     "@types/node": "^20.12.7",
     "@types/pg": "^8.11.5",
-    "@types/react": "18.3.11",
-    "@types/react-dom": "^18",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "autoprefixer": "^10.4.20",
     "bun-types": "^1.0.18-1",
     "eslint": "^8",
-    "eslint-config-next": "^14.2.4",
+    "eslint-config-next": "15.0.0",
     "eslint-plugin-jest-dom": "^5.0.2",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-testing-library": "^6.0.0",
@@ -72,6 +72,8 @@
     "typescript": "^5.4.5"
   },
   "resolutions": {
-    "jackspeak": "2.1.1"
+    "jackspeak": "2.1.1",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1"
   }
 }

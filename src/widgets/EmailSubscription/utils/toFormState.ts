@@ -10,7 +10,7 @@ export const fromErrorToFormState = (
       status: 'error',
       message: 'Invalid form data',
       errors: error.flatten().formErrors,
-      timestamp: Date.now(),
+      trigger: true,
     };
   } else {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -20,7 +20,7 @@ export const fromErrorToFormState = (
           message:
             'This email is already registered in our database!',
           errors: ['Email is already in use'],
-          timestamp: Date.now(),
+          trigger: true,
         };
       }
     }
@@ -31,7 +31,7 @@ export const fromErrorToFormState = (
           ? error.message
           : 'Something went wrong!',
       errors: [],
-      timestamp: Date.now(),
+      trigger: true,
     };
   }
 };
@@ -44,6 +44,6 @@ export const toFormState = (
     status,
     message,
     errors: [],
-    timestamp: Date.now(),
+    trigger: true,
   };
 };

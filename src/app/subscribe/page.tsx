@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function LandingPage(): ReactNode {
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.container}>
@@ -106,7 +106,6 @@ export default function LandingPage(): ReactNode {
             </div>
             <div className={styles.aiVisual}>
               <Image
-                priority
                 className={styles.aiIllustration}
                 src="/assets/ai-features.png"
                 alt="ai features links buddy"
@@ -139,7 +138,7 @@ export default function LandingPage(): ReactNode {
           <p>&copy; 2024 LinksBuddy. All rights reserved.</p>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
 
