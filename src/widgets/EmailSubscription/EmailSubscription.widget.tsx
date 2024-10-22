@@ -1,7 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useTransition } from 'react';
-import { useFormState } from 'react-dom';
+import {
+  useEffect,
+  useRef,
+  startTransition,
+  useActionState,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EmailSubscriptionSchema } from '../../schema/EmailSubscriptionSchema';
@@ -18,16 +22,16 @@ import type { EmailSubscriptionForm } from './EmailSubscription.types';
 import { useAlert } from '@/components/Alert';
 
 const EmailSubscription = (): React.JSX.Element => {
-  const [state, formAction] = useFormState<
+  const [state, formAction, isPending] = useActionState<
     EmailSubscriptionFormState,
     FormData
   >(createEmailSubscription, initialFormState);
-  const [isPending, startTransition] = useTransition();
+  // const [isPending, startTransition] = useTransition();
 
   const alert = useAlert({
     message: state.message,
     status: state.status,
-    timestamp: state.timestamp,
+    trigger: state.trigger,
     duration: 4000,
   });
 
@@ -48,12 +52,12 @@ const EmailSubscription = (): React.JSX.Element => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const onSubmit = handleSubmit(() => {
-    startTransition(async () => {
-      if (formRef.current) {
-        const formData = new FormData(formRef.current!);
-        await formAction(formData);
-      }
-    });
+    if (formRef.current) {
+      const formData = new FormData(formRef.current);
+      startTransition(() => {
+        formAction(formData);
+      });
+    }
   });
 
   useEffect(() => {
@@ -63,16 +67,11 @@ const EmailSubscription = (): React.JSX.Element => {
   }, [state, reset]);
 
   return (
-    <div>
+    <>
       <Alert alert={alert} className="mb-4" />
 
       <section className={styles.containerEmailField}>
-        <form
-          key={state.timestamp}
-          ref={formRef}
-          action={formAction}
-          onSubmit={onSubmit}
-        >
+        <form action={formAction} ref={formRef} onSubmit={onSubmit}>
           <div className={styles.inputWrapper}>
             <TextField
               {...register('email')}
@@ -95,7 +94,7 @@ const EmailSubscription = (): React.JSX.Element => {
           </div>
         </form>
       </section>
-    </div>
+    </>
   );
 };
 

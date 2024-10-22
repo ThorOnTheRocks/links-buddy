@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styles from './dropdown-field.module.css';
 import type { IDropdownFieldProps } from './DropdownField.types';
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
@@ -14,7 +20,7 @@ export const DropdownField = ({
   onSelect,
   placeholderText,
   style,
-}: IDropdownFieldProps): JSX.Element => {
+}: IDropdownFieldProps): ReactNode => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<string>('');
   const hiddenInputRef = useRef<HTMLInputElement>(null);

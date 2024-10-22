@@ -1,6 +1,6 @@
 'use client';
 
-import { forwardRef } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import styles from './text-field.module.css';
 import type { ITextFieldProps } from './TextField.types';
 
@@ -24,7 +24,7 @@ export const TextField = forwardRef<
       ...props
     },
     ref
-  ): JSX.Element => {
+  ): ReactNode => {
     return (
       <>
         {label && (

@@ -4,12 +4,12 @@ export type EmailSubscriptionFormState = {
   message: string;
   status: Status;
   errors?: {};
-  timestamp: number;
+  trigger: boolean;
 };
 
 export const initialFormState: EmailSubscriptionFormState = {
   message: '',
   status: 'idle',
   errors: [],
-  timestamp: 0,
+  trigger: false,
 };

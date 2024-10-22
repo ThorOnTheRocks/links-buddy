@@ -1,5 +1,3 @@
-'use client';
-
 import { Button } from '../Buttons/Button';
 import { Icons } from '../Icons/Icons';
 import styles from './submit-button.module.css';

@@ -10,7 +10,7 @@ export const Button = ({
   isDisabled = false,
   type,
   ...props
-}: IButtonProps): React.JSX.Element => {
+}: IButtonProps): React.ReactNode => {
   const buttonClass = isDisabled
     ? variant === 'primary'
       ? styles.btnPrimaryDisabled
