@@ -20,9 +20,7 @@ export const EmailContent: React.FC<
   username = 'Valued Subscriber',
   subscriberCount = '1,000+',
   welcomeMessage = 'You are officially on the LinksBuddy VIP list!',
-  logoUrl,
-  logoAlt = 'LinksBuddy Logo',
-  ctaUrl = 'https://linksbuddy.org/coming-soon',
+  ctaUrl = 'https://linksbuddy.org',
   ctaText = 'Check Out Our Coming Soon Page',
   contactEmail = 'hello@linksbuddy.org',
   benefitPoints = [
@@ -37,11 +35,14 @@ export const EmailContent: React.FC<
   },
   preferencesUrl = 'https://linksbuddy.org',
   footerContent,
+  logoUrl,
+  logoAlt = 'LinksBuddy Logo',
   baseUrl,
 }) => {
-  const fullLogoUrl = logoUrl
-    ? `${baseUrl}${logoUrl}`
-    : `${baseUrl}/assets/Logo Files/svg/logo-no-brackground.svg`;
+  const fullLogoUrl = new URL(
+    logoUrl || '/assets/Logo Files/svg/logo-no-background.svg',
+    baseUrl
+  ).toString();
 
   return (
     <Body className={styles.emailBody}>
