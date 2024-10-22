@@ -1,77 +1,137 @@
-# LinksBuddy
+<div align="center">
+  <img src="public/assets/Logo Files/png/logo-no-background.png" alt="LinksBuddy Logo" width="500"/>
 
-LinksBuddy is a dynamic link sharing application designed for developers to share, organize, and discover valuable coding resources. Built with Next.js, React, TypeScript, and integrated with Prisma and PostgreSQL, this platform offers a user-friendly interface for developers to manage links, engage in discussions, and personalize their profiles.
+  <p align="center">
+    A modern link management platform powered by AI
+  </p>
 
-## Tech Stack
+  <div align="center">
 
-- **Frontend:** Next.js, React, TypeScript
-- **Backend:** Prisma, PostgreSQL
-- **Other Tools:** Node.js, npm/yarn
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.7-lightgrey)](https://www.prisma.io/)
+[![Vercel](https://img.shields.io/badge/Vercel-Deploy-black)](https://vercel.com)
 
-## Features
+  </div>
 
-- **CRUD Operations:** Create, read, update, and delete links.
-- **Link Validation:** Ensures all submitted URLs follow the correct pattern.
-- **Drag & Drop:** Reorder links with an intuitive drag and drop interface.
-- **User Profiles:** Add and edit profile details including profile picture, name, and email.
-- **Profile Preview:** View and copy the link to your Dev-Links profile.
-- **Responsive Design:** Optimal layout for different device screen sizes.
-- **Interactive UI Elements:** Enhanced user experience with hover and focus states.
-- **Database Integration:** (Bonus) Save details to a PostgreSQL database.
-- **User Authentication:** (Bonus) Create an account and log in.
+  <br />
 
-## Getting Started
+  <p align="center">
+    <a href="#features">Features</a> •
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#tech-stack">Tech Stack</a> •
+    <a href="#contributing">Contributing</a>
+  </p>
+</div>
+
+<div align="center">
+
+[🚀 View Live Demo](https://linksbuddy.org) • [📖 Documentation](https://docs.linksbuddy.org) • [🤝 Community](https://discord.gg/linksbuddy)
+
+</div>
+
+---
+
+## Features ✨
+
+- **Smart Organization**: AI-powered categorization and tagging system
+- **Advanced Analytics**: Deep insights into your link performance
+- **Intelligent Recommendations**: AI-driven content suggestions
+- **Secure Sharing**: Control who sees your links
+- **Custom Collections**: Organize links into public or private collections
+- **Community Driven**: Connect with like-minded individuals
+
+## Tech Stack 🛠️
+
+<div align="center">
+
+![Tech Stack](public/assets/tech-stack.png)
+
+</div>
+
+- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Styling**: CSS Modules
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Icons**: [Lucide Icons](https://lucide.dev/)
+- **Deployment**: [Vercel](https://vercel.com)
+- **Email**: [React Email](https://react.email/)
+
+## Getting Started 🚀
 
 ### Prerequisites
 
-- Node.js
-- npm or yarn
+- Node.js 18+
 - PostgreSQL
+- [Yarn](https://yarnpkg.com/)
 
-### Installation
+### Quick Start
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/ThorOnTheRocks/dev-links.git
-   ```
-2. Install NPM packages
-   ```sh
-   yarn install
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/linksbuddy.git
 
-### Environment Setup
+# Install dependencies
+yarn install
 
-- Set up your PostgreSQL database and note down the credentials.
-- Create a `.env` file in the project root and fill in your database credentials:
-  ```env
-  DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
-  ```
+# Set up environment variables
+cp .env.example .env
 
-### Running the Application
+# Set up the database
+yarn prisma migrate dev
 
-1. To start the development server:
-   ```sh
-   yarn dev
-   ```
-2. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Start the development server
+yarn dev
+```
 
-## Contributing
+## Environment Setup 🔒
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+```env
+DATABASE_URL=                # PostgreSQL connection string
+NEXT_PUBLIC_APP_URL=        # Your app's URL
+NODE_ENV=                   # development/production
+```
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+## Available Scripts 📜
+
+```bash
+yarn dev          # Start development server
+yarn build        # Build for production
+yarn start        # Start production server
+yarn lint         # Run ESLint
+yarn test         # Run tests
+```
+
+## Contributing 🤝
+
+We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
 5. Open a Pull Request
 
-## License
+## Support 💬
 
-Distributed under the MIT License. See `LICENSE` for more information.
+- Documentation: [docs.linksbuddy.org](https://docs.linksbuddy.org)
+- Issues: [GitHub Issues](https://github.com/yourusername/linksbuddy/issues)
+- Discord: [Join our community](https://discord.gg/linksbuddy)
+- Twitter: [@linksbuddy](https://twitter.com/linksbuddy)
 
-## Contact
+## License 📄
 
-Twitter: [https://twitter.com/GianlucaGalota](https://twitter.com/GianlucaGalota)
-Linkedin: [https://www.linkedin.com/in/gianluca-galota/](https://www.linkedin.com/in/gianluca-galota/)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Project Link: [https://github.com/ThorOnTheRocks/dev-links](https://github.com/ThorOnTheRocks/dev-links)
+---
+
+<div align="center">
+
+**[Website](https://linksbuddy.org)** • **[Documentation](https://docs.linksbuddy.org)** • **[Discord](https://discord.gg/linksbuddy)**
+
+Made with ❤️ by the LinksBuddy Team
+
+</div>
