@@ -169,6 +169,13 @@
   color: var(--color-neutral-900);
 }
 
+.aiIllustration {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+  aspect-ratio: 1/1;
+}
+
 .checkIcon {
   width: 1.5rem;
   height: 1.5rem;
@@ -248,5 +255,9 @@
 
   .ctaTitle {
     font-size: 2rem;
+  }
+
+  .aiIllustration {
+    max-width: 100%;
   }
 }

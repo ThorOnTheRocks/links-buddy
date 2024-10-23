@@ -8,7 +8,7 @@
   <div align="center">
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue)](https://www.typescriptlang.org/)
 [![Prisma](https://img.shields.io/badge/Prisma-5.7-lightgrey)](https://www.prisma.io/)
 [![Vercel](https://img.shields.io/badge/Vercel-Deploy-black)](https://vercel.com)
@@ -50,7 +50,7 @@
 
 </div>
 
-- **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Database**: [PostgreSQL](https://www.postgresql.org/)
 - **ORM**: [Prisma](https://www.prisma.io/)
