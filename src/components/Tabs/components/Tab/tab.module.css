@@ -1,0 +1,35 @@
+.tab {
+  padding: 12px 16px;
+  color: var(--color-neutral-600);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: var(--body-font-regular-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tab:hover:not(:disabled) {
+  color: var(--color-primary-hover);
+  border-bottom-color: var(--color-primary-hover);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.tab.selected {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tab.disabled {
+  color: var(--color-neutral-200);
+  cursor: not-allowed;
+}

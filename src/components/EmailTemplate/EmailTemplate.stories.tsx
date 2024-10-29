@@ -1,5 +1,5 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
+import { StoryFn, Meta } from '@storybook/react';
 import { LinksBuddyConfirmationEmail } from './EmailTemplate';
 import { LinksBuddyConfirmationEmailProps } from './EmailTemplate.types';
 
@@ -16,11 +16,11 @@ export default {
     benefitPoints: { control: 'array' },
     logoUrl: { control: 'text' },
   },
-} as Meta;
+} as unknown as Meta;
 
-const Template: Story<LinksBuddyConfirmationEmailProps> = (args) => (
-  <LinksBuddyConfirmationEmail {...args} />
-);
+const Template: StoryFn<LinksBuddyConfirmationEmailProps> = (
+  args
+) => <LinksBuddyConfirmationEmail {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
