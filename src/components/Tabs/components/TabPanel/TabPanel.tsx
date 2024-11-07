@@ -1,4 +1,4 @@
-import { TabPanelProps } from '../../Tab.types';
+import { TabPanelProps } from '../../Tabs.types';
 import styles from './tab-panel.module.css';
 
 export const TabPanel = ({

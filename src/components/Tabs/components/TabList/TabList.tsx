@@ -1,4 +1,4 @@
-import { TabListProps } from '../../Tab.types';
+import { TabListProps } from '../../Tabs.types';
 import styles from './tab-list.module.css';
 
 export const TabList = ({

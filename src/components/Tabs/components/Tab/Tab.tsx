@@ -1,4 +1,4 @@
-import { TabProps } from '../../Tab.types';
+import { TabProps } from '../../Tabs.types';
 import styles from './tab.module.css';
 
 export const Tab = ({
