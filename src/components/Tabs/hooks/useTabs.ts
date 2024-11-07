@@ -4,7 +4,7 @@ import {
   TabProps,
   TabListProps,
   TabPanelProps,
-} from '../Tab.types';
+} from '../Tabs.types';
 import { createKeyboardNavigationHandler } from '../utils/keyboard-navigation';
 
 export const useTabs = ({ defaultTab, onChange }: UseTabsProps) => {
