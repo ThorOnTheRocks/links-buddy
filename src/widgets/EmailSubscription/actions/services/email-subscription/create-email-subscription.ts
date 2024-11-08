@@ -1,10 +1,12 @@
 'use server';
 
-import { CaptchaError } from '../../../utils/captcha/captcha.client';
-import { verifyCaptchaToken } from '../../../utils/captcha/captcha.server';
-import { createFormState } from '../../../utils/create-form-state';
-import { validateEmail } from '../../validations/validateEmail';
-import { createSubscription } from '../create-subscription';
+import {
+  CaptchaError,
+  verifyCaptchaToken,
+  createFormState,
+  validateEmail,
+  createSubscription,
+} from '../../../utils';
 import { sendEmail } from '../send-email';
 import type { EmailSubscriptionFormState } from '../email-subscription/email-subscription.types';
 

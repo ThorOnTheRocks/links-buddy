@@ -4,7 +4,6 @@ import { DropdownField } from './Fields/DropdownField/DropdownField';
 import { TextField } from './Fields/TextField/TextField';
 import { Alert } from './Alert';
 import { FeatureCard } from './FeatureCard/FeatureCard';
-import { LinksBuddyConfirmationEmail } from './EmailTemplate/EmailTemplate';
 import {
   Alert as AlertUI,
   AlertTitle,
@@ -20,6 +19,5 @@ export {
   AlertUI,
   AlertTitle,
   AlertDescription,
-  LinksBuddyConfirmationEmail,
   SubmitButton,
 };

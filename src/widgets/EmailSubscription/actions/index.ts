@@ -1,4 +1,4 @@
-import { createEmailSubscription } from './services/email-subscription/create-subscription';
+import { createEmailSubscription } from './services/email-subscription/create-email-subscription';
 import {
   type EmailSubscriptionFormState,
   initialFormState,
