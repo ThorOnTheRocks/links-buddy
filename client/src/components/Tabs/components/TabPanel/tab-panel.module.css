@@ -1,0 +1,24 @@
+.tabPanel {
+  padding: 16px 0;
+  color: var(--color-neutral-900);
+  background-color: var(--color-neutral-0);
+}
+
+.tabPanel:focus {
+  outline: none;
+}
+
+.visible {
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

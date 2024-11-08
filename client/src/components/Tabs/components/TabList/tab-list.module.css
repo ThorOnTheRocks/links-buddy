@@ -1,0 +1,8 @@
+.tabList {
+  display: flex;
+  gap: 8px;
+}
+
+.vertical {
+  flex-direction: column;
+}
