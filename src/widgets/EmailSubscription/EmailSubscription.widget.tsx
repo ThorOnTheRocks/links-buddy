@@ -50,7 +50,6 @@ const EmailSubscription = (): React.JSX.Element => {
   const onSubmit = handleSubmit(async () => {
     try {
       const token = await getCaptchaToken();
-      console.log({ token });
 
       if (!token) {
         startTransition(() => {
