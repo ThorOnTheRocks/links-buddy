@@ -1,88 +1,100 @@
 'use client';
 
-import {
-  useEffect,
-  useRef,
-  startTransition,
-  useActionState,
-} from 'react';
+import { useRef, startTransition, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { EmailSubscriptionSchema } from '../../schema/EmailSubscriptionSchema';
+import { useActionState } from 'react';
 import {
   type EmailSubscriptionFormState,
   createEmailSubscription,
   initialFormState,
-} from './action';
+} from './actions';
+import { EmailSubscriptionSchema } from './schema/EmailSubscriptionSchema';
+import { EmailSubscriptionForm } from './EmailSubscription.types';
 import { TextField, Alert, SubmitButton } from '@/components';
-
 import styles from './email-subscription.module.css';
-
-import type { EmailSubscriptionForm } from './EmailSubscription.types';
 import { useAlert } from '@/components/Alert';
+import { getCaptchaToken } from './utils/captcha/captcha.client';
 
 const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction, isPending] = useActionState<
     EmailSubscriptionFormState,
     FormData
   >(createEmailSubscription, initialFormState);
-  // const [isPending, startTransition] = useTransition();
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<EmailSubscriptionForm>({
+    resolver: zodResolver(EmailSubscriptionSchema),
+    mode: 'onSubmit',
+  });
 
   const alert = useAlert({
-    message: state.message,
+    message: state.message || '',
     status: state.status,
     trigger: state.trigger,
     duration: 4000,
   });
 
-  const {
-    formState: { errors },
-    handleSubmit,
-    register,
-    reset,
-  } = useForm<EmailSubscriptionForm>({
-    resolver: zodResolver(EmailSubscriptionSchema),
-    mode: 'onSubmit',
-    defaultValues: {
-      email: '',
-    },
-    ...(state.errors ?? {}),
-  });
+  useEffect(() => {
+    if (state.status === 'success') {
+      reset();
+    }
+  }, [state.status, reset]);
 
-  const formRef = useRef<HTMLFormElement>(null);
+  const onSubmit = handleSubmit(async () => {
+    try {
+      const token = await getCaptchaToken();
+      console.log({ token });
 
-  const onSubmit = handleSubmit(() => {
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
+      if (!token) {
+        startTransition(() => {
+          formAction(new FormData());
+        });
+        return;
+      }
+
+      if (formRef.current) {
+        const formData = new FormData(formRef.current);
+        formData.append('tokenGRecaptcha', token);
+
+        startTransition(() => {
+          formAction(formData);
+        });
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
       startTransition(() => {
-        formAction(formData);
+        formAction(new FormData());
       });
     }
   });
-
-  useEffect(() => {
-    if (state.status === 'success') {
-      reset({ email: '' });
-    }
-  }, [state, reset]);
 
   return (
     <>
       <Alert alert={alert} className="mb-4" />
 
       <section className={styles.containerEmailField}>
-        <form action={formAction} ref={formRef} onSubmit={onSubmit}>
+        <form ref={formRef} onSubmit={onSubmit}>
           <div className={styles.inputWrapper}>
             <TextField
               {...register('email')}
+              type="email"
+              name="email"
               tabIndex={0}
               aria-label="user-email"
-              type="email"
               className={styles.emailFieldInput}
-              name="email"
               placeholder="Enter your email"
-              isError={Boolean(errors?.email)}
-              error={errors?.email?.message}
+              isError={Boolean(errors?.email || state.errors?.email)}
+              error={
+                errors?.email?.message || state.errors?.email?.[0]
+              }
+              disabled={isPending}
             />
 
             <SubmitButton

@@ -1,4 +1,3 @@
-// src/components/EmailTemplate/EmailTemplate.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import { LinksBuddyConfirmationEmail } from './EmailTemplate';
 

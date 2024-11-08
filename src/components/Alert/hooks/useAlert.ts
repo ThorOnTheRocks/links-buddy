@@ -7,7 +7,7 @@ import type { AlertState } from './useAlert.types';
 interface UseAlertProps {
   message: string;
   status: Status;
-  trigger?: boolean;
+  trigger?: number;
   duration?: number;
 }
 
@@ -22,14 +22,14 @@ const initialAlertState: AlertState = {
 
 export const useAlert = ({
   message,
-  trigger = false,
+  trigger = 0,
   status,
   duration = 3000,
 }: UseAlertProps): UseAlertReturn => {
   const [alert, setAlert] = useState<AlertState>(initialAlertState);
 
   useEffect(() => {
-    if (trigger) {
+    if (trigger > 0) {
       setAlert({
         display: 'show',
         type: status === 'error' ? 'destructive' : 'default',

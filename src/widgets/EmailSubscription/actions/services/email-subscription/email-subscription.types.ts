@@ -1,15 +1,18 @@
 import type { Status } from '@/types/common.types';
 
 export type EmailSubscriptionFormState = {
-  message: string;
   status: Status;
-  errors?: {};
-  trigger: boolean;
+  message: string;
+  errors?: {
+    email?: string[];
+    tokenGRecaptcha?: string[];
+  } | null;
+  trigger: number;
 };
 
 export const initialFormState: EmailSubscriptionFormState = {
-  message: '',
   status: 'idle',
-  errors: [],
-  trigger: false,
+  message: '',
+  errors: {},
+  trigger: 0,
 };

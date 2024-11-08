@@ -20,7 +20,6 @@ const meta: Meta = {
 
 export default meta;
 
-// Basic example
 const BasicTabs = () => {
   const { getTabListProps, getTabProps, getTabPanelProps } = useTabs({
     defaultTab: 'account',
@@ -86,7 +85,6 @@ const BasicTabs = () => {
   );
 };
 
-// With icons
 const IconTabs = () => {
   const { getTabListProps, getTabProps, getTabPanelProps } = useTabs({
     defaultTab: 'account',
@@ -355,7 +353,6 @@ const IconTabs = () => {
   );
 };
 
-// Vertical orientation
 const VerticalTabs = () => {
   const { getTabListProps, getTabProps, getTabPanelProps } = useTabs({
     defaultTab: 'account',
@@ -432,7 +429,6 @@ const VerticalTabs = () => {
   );
 };
 
-// Controlled example
 const ControlledTabs = () => {
   const [activeTab, setActiveTab] = useState('tab1');
 
