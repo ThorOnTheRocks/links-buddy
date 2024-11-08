@@ -1,6 +1,0 @@
-{
-  "rewrites": [{ "source": "/(.*)", "destination": "/client/$1" }],
-  "buildCommand": "cd client && pnpm install && pnpm build",
-  "outputDirectory": "client/.next",
-  "installCommand": "cd client && pnpm install"
-}
