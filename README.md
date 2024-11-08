@@ -66,7 +66,7 @@
 
 - Node.js 18+
 - PostgreSQL
-- [Yarn](https://yarnpkg.com/)
+- [Pnpm](https://pnpm.io/)
 
 ### Quick Start
 
@@ -75,16 +75,16 @@
 git clone https://github.com/yourusername/linksbuddy.git
 
 # Install dependencies
-yarn install
+pnpm install
 
 # Set up environment variables
 cp .env.example .env
 
 # Set up the database
-yarn prisma migrate dev
+pnpm prisma migrate dev
 
 # Start the development server
-yarn dev
+pnpm dev
 ```
 
 ## Environment Setup 🔒
@@ -98,11 +98,11 @@ NODE_ENV=                   # development/production
 ## Available Scripts 📜
 
 ```bash
-yarn dev          # Start development server
-yarn build        # Build for production
-yarn start        # Start production server
-yarn lint         # Run ESLint
-yarn test         # Run tests
+pnpm dev          # Start development server
+pnpm build        # Build for production
+pnpm start        # Start production server
+pnpm lint         # Run ESLint
+pnpm test         # Run tests
 ```
 
 ## Contributing 🤝
