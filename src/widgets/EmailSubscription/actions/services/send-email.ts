@@ -1,6 +1,6 @@
 'use server';
 
-import { LinksBuddyConfirmationEmail } from '../components/index';
+import { LinksBuddyConfirmationEmail } from '../../../../components/index';
 import { Resend } from 'resend';
 
 export async function sendEmail(email: string) {

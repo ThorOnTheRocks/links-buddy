@@ -1,8 +1,8 @@
-import { createEmailSubscription } from './createEmailSubscription';
+import { createEmailSubscription } from './services/email-subscription/create-subscription';
 import {
   type EmailSubscriptionFormState,
   initialFormState,
-} from './EmailSubscription.types';
+} from './services/email-subscription/email-subscription.types';
 
 export {
   createEmailSubscription,

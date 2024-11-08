@@ -150,7 +150,6 @@ export const LinksBuddyConfirmationEmail: React.FC<
   LinksBuddyConfirmationEmailProps
 > = (props) => {
   if (typeof window === 'undefined') {
-    // Server-side rendering (for email clients)
     return (
       <Html>
         <Head />
@@ -162,6 +161,5 @@ export const LinksBuddyConfirmationEmail: React.FC<
     );
   }
 
-  // Client-side rendering (for Storybook)
   return <EmailContent {...props} />;
 };
