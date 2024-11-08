@@ -14,6 +14,7 @@ import {
   createEmailSubscription,
   initialFormState,
 } from './action';
+import { useRecaptcha } from '@/hooks/useRecaptcha';
 import { TextField, Alert, SubmitButton } from '@/components';
 
 import styles from './email-subscription.module.css';
@@ -26,7 +27,7 @@ const EmailSubscription = (): React.JSX.Element => {
     EmailSubscriptionFormState,
     FormData
   >(createEmailSubscription, initialFormState);
-  // const [isPending, startTransition] = useTransition();
+  const { executeRecaptcha } = useRecaptcha();
 
   const alert = useAlert({
     message: state.message,
@@ -51,12 +52,22 @@ const EmailSubscription = (): React.JSX.Element => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const onSubmit = handleSubmit(() => {
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      startTransition(() => {
-        formAction(formData);
-      });
+  const onSubmit = handleSubmit(async () => {
+    try {
+      if (formRef.current) {
+        // Get reCAPTCHA token before submitting
+        const token = await executeRecaptcha('email_subscription');
+
+        const formData = new FormData(formRef.current);
+        // Add the reCAPTCHA token to the form data
+        formData.append('recaptchaToken', token);
+
+        startTransition(() => {
+          formAction(formData);
+        });
+      }
+    } catch (error) {
+      console.error('ReCAPTCHA error:', error);
     }
   });
 

@@ -10,6 +10,7 @@ import {
 import type { EmailSubscriptionFormState } from './EmailSubscription.types';
 import { ZodError } from 'zod';
 import { sendEmail } from '@/actions/sendEmail';
+import { verifyRecaptchaToken } from './verifyRecaptchaToken';
 
 export async function createEmailSubscription(
   _formState: EmailSubscriptionFormState,
@@ -25,6 +26,8 @@ export async function createEmailSubscription(
   }
 
   try {
+    await verifyRecaptchaToken(parsedData.data.recaptchaToken);
+
     const response = await prisma.emailSubscription.create({
       data: {
         email: parsedData.data.email,
