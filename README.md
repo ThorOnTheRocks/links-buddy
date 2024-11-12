@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="client/public/assets/Logo Files/png/logo-no-background.png" alt="LinksBuddy Logo" width="500"/>
+  <img src="public/assets/Logo Files/png/logo-no-background.png" alt="LinksBuddy Logo" width="500"/>
 
   <p align="center">
     A modern link management platform powered by AI
