@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { instrumentSans } from '../fonts/fonts';
-import './globals.css';
+import { instrumentSans } from '../styles/fonts/fonts';
+import '../styles/globals.css';
 import Script from 'next/script';
 
 export const metadata: Metadata = {

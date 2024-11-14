@@ -9,7 +9,7 @@ import {
   Globe,
   Rocket,
 } from 'lucide-react';
-import EmailLanding from '@/widgets/EmailSubscription/EmailSubscription.widget';
+import { EmailSubscription } from '@/presentation/widgets';
 import styles from './subscribe-page.module.css';
 
 export const metadata: Metadata = {
@@ -56,7 +56,7 @@ export default function LandingPage(): ReactNode {
               role="form"
               aria-label="Email subscription form"
             >
-              <EmailLanding />
+              <EmailSubscription />
               <p className={styles.formHint} aria-live="polite">
                 <Rocket
                   className={styles.Rocket}
@@ -168,7 +168,7 @@ export default function LandingPage(): ReactNode {
               Join thousands of professionals managing their links
               smarter with LinksBuddy.
             </p>
-            <EmailLanding />
+            <EmailSubscription />
           </div>
         </div>
       </section>

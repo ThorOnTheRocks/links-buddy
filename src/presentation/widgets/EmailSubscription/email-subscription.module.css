@@ -70,14 +70,14 @@
 
 @media (max-width: 768px) {
   .emailFieldInput {
-    min-width: 12rem;
-    font-size: 0.75rem;
+    min-width: 15rem;
+    font-size: 0.95rem;
   }
 
   .emailSubmitBtn {
     width: auto;
     padding: 0 0.75rem;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
   }
 }
 

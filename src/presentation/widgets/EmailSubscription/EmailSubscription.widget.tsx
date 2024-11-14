@@ -11,9 +11,9 @@ import {
 } from './actions';
 import { EmailSubscriptionSchema } from './schema/EmailSubscriptionSchema';
 import { EmailSubscriptionForm } from './EmailSubscription.types';
-import { TextField, Alert, SubmitButton } from '@/components';
+import { TextField, Alert, SubmitButton } from '../../components';
 import styles from './email-subscription.module.css';
-import { useAlert } from '@/components/Alert';
+import { useAlert } from '../../components/Alert';
 import { getCaptchaToken } from './utils/captcha/captcha.client';
 
 const EmailSubscription = (): React.JSX.Element => {
