@@ -1,4 +1,4 @@
-import { User } from '../entities/User/User';
+import { User } from '../../../User/core/entities/User';
 
 export const user: User = {
   id: '423345',

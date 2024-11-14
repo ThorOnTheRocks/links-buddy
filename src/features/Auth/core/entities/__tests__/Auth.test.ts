@@ -1,5 +1,5 @@
 import { Auth, AuthProvider } from '../Auth';
-import { user } from '../../../mocks/Auth.mock';
+import { user } from '../../mocks/Auth.mock';
 
 describe('Auth Entity', () => {
   describe('Local Authentication', () => {
