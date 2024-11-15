@@ -9,7 +9,7 @@ import {
   Globe,
   Rocket,
 } from 'lucide-react';
-import EmailLanding from '@/presentation/widgets/EmailSubscription/EmailSubscription.widget';
+import EmailLanding from '@/widgets/EmailSubscription/EmailSubscription.widget';
 import styles from './subscribe-page.module.css';
 
 export const metadata: Metadata = {
