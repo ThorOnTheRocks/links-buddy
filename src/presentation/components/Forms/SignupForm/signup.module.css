@@ -1,0 +1,9 @@
+.signupWrapper {
+  background-color: var(--color-neutral-300);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  min-height: 50vh;
+}

@@ -16,22 +16,17 @@ model EmailSubscription {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  email         String    @unique
-  username      String    @unique
-  firstName     String
-  lastName      String
-  passwordHash  String?
-  avatar        String?
-  isActive      Boolean   @default(true)
-  deletedAt     DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id           String    @id @default(cuid())
+  sessions     Session[]
+  email        String    @unique
+  passwordHash String
+}
 
-  auths         UserAuthProvider[]
-
-  @@index([email])
-  @@index([username])
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
 model UserAuthProvider {
@@ -42,8 +37,6 @@ model UserAuthProvider {
   email       String
   createdAt   DateTime    @default(now())
   lastUsedAt  DateTime    @default(now())
-
-  user        User        @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerId])
   @@unique([provider, email])
