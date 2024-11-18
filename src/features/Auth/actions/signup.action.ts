@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '@/db';
+import prisma from '@/infrastructure/db';
 import { signupSchema } from '@/schema/signup.schema';
 import { SignupFormState } from './signup.types';
 import {

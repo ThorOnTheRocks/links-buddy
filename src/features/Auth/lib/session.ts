@@ -8,7 +8,7 @@ import {
   SESSION_REFRESH_INTERVAL_MS,
 } from './session.constants';
 
-import prisma from '@/db';
+import prisma from '@/infrastructure/db';
 
 export const generateRandomSessionToken = () => {
   const bytes = new Uint8Array(20);

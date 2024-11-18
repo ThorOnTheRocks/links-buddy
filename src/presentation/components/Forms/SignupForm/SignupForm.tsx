@@ -14,8 +14,7 @@ import {
   type SignupFormData,
 } from '@/schema/signup.schema';
 
-import { SubmitButton } from '@/presentation/components';
-import { TextField } from '../../Fields/TextField/TextField';
+import { SubmitButton, TextField } from '@/presentation/components';
 import styles from './signup.module.css';
 import { SignupFormState } from '@/features/Auth/actions/signup.types';
 import type { ISignupFormProps } from './SignupForm.types';
