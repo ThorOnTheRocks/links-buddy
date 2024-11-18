@@ -1,7 +1,6 @@
 {
   "name": "buddylinks",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev --turbo",
     "build": "prisma generate && next build",
@@ -62,7 +61,6 @@
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "autoprefixer": "^10.4.20",
-    "bun-types": "^1.0.18-1",
     "eslint": "^8",
     "eslint-config-next": "15.0.0",
     "eslint-plugin-jest-dom": "^5.0.2",

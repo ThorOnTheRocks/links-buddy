@@ -1,5 +1,5 @@
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
-import prisma from '@/db';
+import prisma from '@/infrastructure/db';
 
 export async function createSubscription(email: string) {
   try {

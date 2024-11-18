@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import EmailLanding from '@/presentation/widgets/EmailSubscription/EmailSubscription.widget';
 import styles from './subscribe-page.module.css';
+import EmailSubscription from '@/presentation/widgets/EmailSubscription/EmailSubscription.widget';
 
 export const metadata: Metadata = {
   title: 'LinksBuddy - Smart Link Management',
@@ -56,7 +57,7 @@ export default function LandingPage(): ReactNode {
               role="form"
               aria-label="Email subscription form"
             >
-              <EmailLanding />
+              <EmailSubscription />
               <p className={styles.formHint} aria-live="polite">
                 <Rocket
                   className={styles.Rocket}
@@ -168,7 +169,7 @@ export default function LandingPage(): ReactNode {
               Join thousands of professionals managing their links
               smarter with LinksBuddy.
             </p>
-            <EmailLanding />
+            <EmailSubscription />
           </div>
         </div>
       </section>
