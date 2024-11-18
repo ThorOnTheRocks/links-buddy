@@ -9,10 +9,12 @@ import {
   createSession,
   setSessionCookie,
   verifyPasswordHash,
+  invalidateSession,
 } from '../lib';
 import { Status } from '@/types/common.types';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import { deleteSessionCookie, getAuth } from '../lib/cookie';
 
 export const signup = async (
   _formState: SignupFormState,
@@ -132,4 +134,17 @@ export const signin = async (
     };
   }
   redirect('/dashboard');
+};
+
+export const signOut = async () => {
+  const { session } = await getAuth();
+
+  if (!session) {
+    redirect('/signin');
+  }
+
+  await invalidateSession(session.id);
+  await deleteSessionCookie();
+
+  redirect('/signin');
 };
