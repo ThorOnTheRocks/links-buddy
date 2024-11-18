@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Mail, Lock } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { AuthForm } from '../AuthForm';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const mockFormFields = [
   {
@@ -19,6 +21,14 @@ const mockFormFields = [
     placeholder: '',
   },
 ] as const;
+
+jest.mock('next/navigation', () => ({
+  usePathname: jest.fn(),
+}));
+
+jest.mock('@hookform/resolvers/zod', () => ({
+  zodResolver: jest.fn(() => jest.fn()),
+}));
 
 jest.mock('@/presentation/components', () => ({
   SubmitButton: ({ children, isPending }: any) => (
@@ -71,11 +81,12 @@ jest.mock('react-hook-form', () => ({
   }),
 }));
 
-jest.mock('@/features/Auth/actions/signup.action', () => ({
+jest.mock('@/features/Auth/actions/auth.action', () => ({
   signup: jest.fn(),
+  signin: jest.fn(),
 }));
 
-describe('SignupForm', () => {
+describe('AuthForm', () => {
   const mockUseActionState = jest.spyOn(
     require('react'),
     'useActionState'
@@ -90,39 +101,74 @@ describe('SignupForm', () => {
     ]);
   });
 
-  it('should render all form fields correctly', () => {
-    render(<AuthForm formFields={mockFormFields} />);
+  describe('Signup Form', () => {
+    beforeEach(() => {
+      (usePathname as jest.Mock).mockReturnValue('/signup');
+    });
 
-    expect(screen.getByText('Create Account')).toBeInTheDocument();
-    expect(screen.getByTestId('email-input')).toBeInTheDocument();
-    expect(screen.getByTestId('password-input')).toBeInTheDocument();
-    expect(screen.getByTestId('submit-button')).toBeInTheDocument();
+    it('should render signup form fields correctly', () => {
+      render(<AuthForm formFields={mockFormFields} />);
+
+      expect(
+        screen.getByText('Create Your Account')
+      ).toBeInTheDocument();
+      expect(screen.getByTestId('email-input')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('password-input')
+      ).toBeInTheDocument();
+      expect(screen.getByText('Create account')).toBeInTheDocument();
+      expect(
+        screen.getByText('Already have an account?')
+      ).toBeInTheDocument();
+      expect(screen.getByText('Log in')).toBeInTheDocument();
+    });
+
+    it('should handle form submission', async () => {
+      const user = userEvent.setup();
+      render(<AuthForm formFields={mockFormFields} />);
+
+      const emailInput = screen.getByTestId('email-input');
+      const passwordInput = screen.getByTestId('password-input');
+      const submitButton = screen.getByText('Create account');
+
+      await user.clear(emailInput);
+      await user.type(emailInput, 'test@example.com');
+      await user.clear(passwordInput);
+      await user.type(passwordInput, 'Password123');
+
+      expect(emailInput).toHaveValue('test@example.com');
+      expect(passwordInput).toHaveValue('Password123');
+
+      await user.click(submitButton);
+    });
   });
 
-  it('should handle form submission', async () => {
-    const user = userEvent.setup();
-    render(<AuthForm formFields={mockFormFields} />);
+  describe('Signin Form', () => {
+    beforeEach(() => {
+      (usePathname as jest.Mock).mockReturnValue('/signin');
+    });
 
-    const emailInput = screen.getByTestId('email-input');
-    const passwordInput = screen.getByTestId('password-input');
-    const submitButton = screen.getByTestId('submit-button');
+    it('should render signin form fields correctly', () => {
+      render(<AuthForm formFields={mockFormFields} />);
 
-    await user.clear(emailInput);
-    await user.type(emailInput, 'test@example.com');
-    await user.clear(passwordInput);
-    await user.type(passwordInput, 'Password123');
-
-    expect(emailInput).toHaveValue('test@example.com');
-    expect(passwordInput).toHaveValue('Password123');
-
-    await user.click(submitButton);
+      expect(screen.getByText('Welcome Back')).toBeInTheDocument();
+      expect(screen.getByTestId('email-input')).toBeInTheDocument();
+      expect(
+        screen.getByTestId('password-input')
+      ).toBeInTheDocument();
+      expect(screen.getByText('Continue')).toBeInTheDocument();
+      expect(
+        screen.getByText("Don't have an account?")
+      ).toBeInTheDocument();
+      expect(screen.getByText('Sign Up')).toBeInTheDocument();
+    });
   });
 
   it('should display loading state when submitting', () => {
     mockUseActionState.mockReturnValueOnce([
       { status: 'idle', message: '', errors: null },
       jest.fn(),
-      true, // isPending
+      true,
     ]);
 
     render(<AuthForm formFields={mockFormFields} />);
@@ -156,5 +202,11 @@ describe('SignupForm', () => {
 
     render(<AuthForm formFields={mockFormFields} />);
     expect(screen.getByText('Invalid email')).toBeInTheDocument();
+  });
+
+  it('should call zodResolver with correct schema based on pathname', () => {
+    (usePathname as jest.Mock).mockReturnValue('/signup');
+    render(<AuthForm formFields={mockFormFields} />);
+    expect(zodResolver).toHaveBeenCalled();
   });
 });

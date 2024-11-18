@@ -15,7 +15,6 @@ import {
   signupSchema,
   signInSchema,
   type SignupFormData,
-  type SignInFormData,
 } from '@/schema/auth.schema';
 
 import { SubmitButton, TextField } from '@/presentation/components';
