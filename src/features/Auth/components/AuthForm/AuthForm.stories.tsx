@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SignupForm } from './SignupForm';
+import { AuthForm } from './AuthForm';
 import { Mail, Lock } from 'lucide-react';
 import { Status } from '@/types/common.types';
 
 const meta = {
-  title: 'Forms/SignupForm',
-  component: SignupForm,
+  title: 'Forms/AuthForm',
+  component: AuthForm,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof SignupForm>;
+} satisfies Meta<typeof AuthForm>;
 
 export default meta;
-type Story = StoryObj<typeof SignupForm>;
+type Story = StoryObj<typeof AuthForm>;
 
 const mockFormFields = [
   {

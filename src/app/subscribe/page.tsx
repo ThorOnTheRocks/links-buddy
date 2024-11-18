@@ -9,9 +9,8 @@ import {
   Globe,
   Rocket,
 } from 'lucide-react';
-import EmailLanding from '@/presentation/widgets/EmailSubscription/EmailSubscription.widget';
+import { EmailSubscription } from '@/presentation/widgets';
 import styles from './subscribe-page.module.css';
-import EmailSubscription from '@/presentation/widgets/EmailSubscription/EmailSubscription.widget';
 
 export const metadata: Metadata = {
   title: 'LinksBuddy - Smart Link Management',

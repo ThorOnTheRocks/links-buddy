@@ -1,7 +1,8 @@
 import type { EmailSubscriptionFormState } from '../actions/services/email-subscription/email-subscription.types';
+import { Status } from '@/types/common.types';
 
 export function createFormState(
-  status: 'success' | 'error',
+  status: Status.SUCCESS | Status.ERROR,
   message: string,
   errors?: Record<string, string[]>
 ): EmailSubscriptionFormState {

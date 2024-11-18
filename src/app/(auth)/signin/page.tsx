@@ -1,9 +1,9 @@
-import { SignupForm } from '@/presentation/components';
-import { FORM_FIELDS } from './_signup-page.constants';
+import { AuthForm } from '@/features/Auth/index';
+import { FORM_FIELDS } from './_signin-page.constants';
 import Image from 'next/image';
-import styles from './signup-page.module.css';
+import styles from '../auth-page.module.css';
 
-export default function SignUp() {
+export default function SignIn() {
   return (
     <section className={styles.signupPageWrapper}>
       <Image
@@ -16,7 +16,7 @@ export default function SignUp() {
         aria-hidden="true"
       />
 
-      <SignupForm formFields={FORM_FIELDS} />
+      <AuthForm formFields={FORM_FIELDS} />
     </section>
   );
 }

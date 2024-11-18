@@ -1,3 +1,3 @@
-import EmailSubscription from './EmailSubscription/EmailSubscription.widget';
+import { EmailSubscription } from './EmailSubscription/EmailSubscription.widget';
 
 export { EmailSubscription };

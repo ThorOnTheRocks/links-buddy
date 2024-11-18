@@ -18,9 +18,9 @@ import {
 } from '@/presentation/components';
 import styles from './email-subscription.module.css';
 import { useAlert } from '@/presentation/components/Alert';
-import { getCaptchaToken } from './utils/captcha/captcha.client';
+import { getCaptchaToken } from '@/utils';
 
-const EmailSubscription = (): React.JSX.Element => {
+export const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction, isPending] = useActionState<
     EmailSubscriptionFormState,
     FormData
@@ -112,5 +112,3 @@ const EmailSubscription = (): React.JSX.Element => {
     </>
   );
 };
-
-export default EmailSubscription;

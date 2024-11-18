@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Mail, Lock } from 'lucide-react';
-import { SignupForm } from '../SignupForm';
+import { AuthForm } from '../AuthForm';
 
 const mockFormFields = [
   {
@@ -91,7 +91,7 @@ describe('SignupForm', () => {
   });
 
   it('should render all form fields correctly', () => {
-    render(<SignupForm formFields={mockFormFields} />);
+    render(<AuthForm formFields={mockFormFields} />);
 
     expect(screen.getByText('Create Account')).toBeInTheDocument();
     expect(screen.getByTestId('email-input')).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe('SignupForm', () => {
 
   it('should handle form submission', async () => {
     const user = userEvent.setup();
-    render(<SignupForm formFields={mockFormFields} />);
+    render(<AuthForm formFields={mockFormFields} />);
 
     const emailInput = screen.getByTestId('email-input');
     const passwordInput = screen.getByTestId('password-input');
@@ -125,7 +125,7 @@ describe('SignupForm', () => {
       true, // isPending
     ]);
 
-    render(<SignupForm formFields={mockFormFields} />);
+    render(<AuthForm formFields={mockFormFields} />);
 
     const submitButton = screen.getByTestId('submit-button');
     expect(submitButton).toBeDisabled();
@@ -154,7 +154,7 @@ describe('SignupForm', () => {
         },
       }));
 
-    render(<SignupForm formFields={mockFormFields} />);
+    render(<AuthForm formFields={mockFormFields} />);
     expect(screen.getByText('Invalid email')).toBeInTheDocument();
   });
 });

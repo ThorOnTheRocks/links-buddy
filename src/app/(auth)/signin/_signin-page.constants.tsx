@@ -1,8 +1,8 @@
 import { Status } from '@/types/common.types';
-import { SignupFormState } from '@/features/Auth/actions/signup.types';
+import { SigninFormState } from '@/features/Auth/actions/auth.types';
 import { Mail, Lock } from 'lucide-react';
 
-export const INITIAL_STATE: SignupFormState = {
+export const INITIAL_STATE: SigninFormState = {
   status: Status.IDLE,
   message: '',
   errors: null,
@@ -18,14 +18,7 @@ export const FORM_FIELDS = [
   },
   {
     name: 'password',
-    label: 'Create password',
-    type: 'password',
-    icon: <Lock />,
-    placeholder: '',
-  },
-  {
-    name: 'confirmPassword',
-    label: 'Confirm password',
+    label: 'Password',
     type: 'password',
     icon: <Lock />,
     placeholder: '',

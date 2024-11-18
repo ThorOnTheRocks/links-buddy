@@ -6,35 +6,65 @@ import {
   useActionState,
   useRef,
 } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { signup } from '@/features/Auth/actions/signup.action';
+import { signup, signin } from '@/features/Auth/actions/auth.action';
 import {
   signupSchema,
+  signInSchema,
   type SignupFormData,
-} from '@/schema/signup.schema';
+  type SignInFormData,
+} from '@/schema/auth.schema';
 
 import { SubmitButton, TextField } from '@/presentation/components';
-import styles from './signup.module.css';
-import { SignupFormState } from '@/features/Auth/actions/signup.types';
-import type { ISignupFormProps } from './SignupForm.types';
-import { INITIAL_STATE } from './SignupForm.constants';
+import styles from './auth-form.module.css';
+import {
+  SignupFormState,
+  SigninFormState,
+} from '@/features/Auth/actions/auth.types';
+import type { IAuthFormProps } from './AuthForm.types';
+import {
+  INITIAL_SIGNIN_STATE,
+  INITIAL_SIGNUP_STATE,
+} from './AuthForm.constants';
 
-export const SignupForm = ({
+export const AuthForm = ({
   formFields,
-}: ISignupFormProps): ReactNode => {
+}: IAuthFormProps): ReactNode => {
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, formAction, isPending] = useActionState<
-    SignupFormState,
+  const pathname = usePathname();
+  const isSignup = pathname === '/signup';
+
+  const serverAction = isSignup ? signup : signin;
+  const INITIAL_STATE = isSignup
+    ? INITIAL_SIGNUP_STATE
+    : INITIAL_SIGNIN_STATE;
+
+  const [_state, formAction, isPending] = useActionState<
+    SignupFormState | SigninFormState,
     FormData
-  >(signup, INITIAL_STATE);
+  >(serverAction, INITIAL_STATE);
+
+  const schema = isSignup ? signupSchema : signInSchema;
+
+  const config = {
+    title: isSignup ? 'Create Your Account' : 'Welcome Back',
+    buttonText: isSignup ? 'Create account' : 'Continue',
+    secondaryText: isSignup
+      ? 'Already have an account?'
+      : "Don't have an account?",
+    secondaryLinkText: isSignup ? 'Log in' : 'Sign Up',
+    secondaryLink: isSignup ? '/signin' : '/signup',
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(schema),
   });
 
   const onSubmit = async () => {
@@ -47,7 +77,7 @@ export const SignupForm = ({
   return (
     <section className={styles.signupWrapper}>
       <div className={styles.formContainer}>
-        <h2 className={styles.signupTitle}>Create Account</h2>
+        <h2 className={styles.signupTitle}>{config.title}</h2>
         <form
           ref={formRef}
           action={formAction}
@@ -80,10 +110,16 @@ export const SignupForm = ({
 
           <div className={styles.buttonWrapper}>
             <SubmitButton isPending={isPending}>
-              Create new account
+              {config.buttonText}
             </SubmitButton>
           </div>
         </form>
+        <div className={styles.secondaryTextWrapper}>
+          <span>{config.secondaryText} </span>
+          <Link href={config.secondaryLink}>
+            {config.secondaryLinkText}
+          </Link>
+        </div>
       </div>
     </section>
   );

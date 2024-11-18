@@ -91,6 +91,7 @@ export const validateSession = async (sessionToken: string) => {
 
     return { session, user };
   }
+  return { session, user };
 };
 
 export const invalidateSession = async (sessionId: string) => {

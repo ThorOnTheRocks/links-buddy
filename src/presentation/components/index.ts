@@ -9,7 +9,6 @@ import {
   AlertTitle,
   AlertDescription,
 } from './ui/alert';
-import { SignupForm } from './Forms/SignupForm/SignupForm';
 
 export {
   Alert,
@@ -21,5 +20,4 @@ export {
   AlertTitle,
   AlertDescription,
   SubmitButton,
-  SignupForm,
 };

@@ -1,4 +1,4 @@
-.signupWrapper {
+.authWrapper {
   background-color: var(--color-neutral-300);
   display: flex;
   justify-content: center;
@@ -15,7 +15,7 @@
   max-width: 24rem;
 }
 
-.signupTitle {
+.authTitle {
   font-size: var(--heading-font-bold-md);
   margin-bottom: 1.5rem;
   text-align: center;
@@ -25,7 +25,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
 }
 
 .fieldContainer {
@@ -34,7 +33,7 @@
   min-height: 80px;
 }
 
-.signupFields {
+.authFields {
   width: 100%;
 }
 
@@ -47,12 +46,16 @@
   padding: 0.45rem 1.75rem;
 }
 
+.secondaryTextWrapper {
+  margin-top: 10px;
+}
+
 @media (max-width: 640px) {
   .formContainer {
     padding: 1.5rem;
   }
 
-  .signupTitle {
+  .authTitle {
     font-size: var(--heading-font-bold-sm);
     margin-bottom: 1rem;
   }

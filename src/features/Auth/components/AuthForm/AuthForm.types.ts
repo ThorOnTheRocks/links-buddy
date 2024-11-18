@@ -6,6 +6,6 @@ export interface FormField {
   readonly placeholder?: string;
 }
 
-export interface ISignupFormProps {
+export interface IAuthFormProps {
   formFields: readonly FormField[];
 }
