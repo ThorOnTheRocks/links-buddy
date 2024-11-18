@@ -3,12 +3,13 @@
 import prisma from '@/db';
 import { signupSchema } from '@/schema/signup.schema';
 import { SignupFormState } from './signup.types';
-import { hashPassword } from '../password';
 import {
+  hashPassword,
   generateRandomSessionToken,
   createSession,
-} from '../session';
-import { setSessionCookie } from '../cookie';
+  setSessionCookie,
+} from '../lib';
+import { Status } from '@/types/common.types';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
@@ -48,10 +49,12 @@ export const signup = async (
     const session = await createSession(sessionToken, user.id);
 
     await setSessionCookie(sessionToken, session.expiresAt);
+
+    console.log('User session created: ', user);
   } catch (error) {
     if (error instanceof z.ZodError) {
       return {
-        status: 'error',
+        status: Status.ERROR,
         message: 'Validation failed',
         errors: error.flatten().fieldErrors,
       };
@@ -60,11 +63,10 @@ export const signup = async (
     console.error('Signup error:', error);
 
     return {
-      status: 'error',
+      status: Status.ERROR,
       message: 'Something went wrong. Please try again.',
       errors: null,
     };
-  } finally {
-    redirect('/');
   }
+  redirect('/');
 };

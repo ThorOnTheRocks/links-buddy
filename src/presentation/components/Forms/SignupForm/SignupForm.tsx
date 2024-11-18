@@ -1,6 +1,11 @@
 'use client';
 
-import { startTransition, useActionState, useRef } from 'react';
+import {
+  ReactNode,
+  startTransition,
+  useActionState,
+  useRef,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signup } from '@/features/Auth/actions/signup.action';
@@ -11,21 +16,20 @@ import {
 
 import { SubmitButton } from '@/presentation/components';
 import { TextField } from '../../Fields/TextField/TextField';
-import { Mail, Lock } from 'lucide-react';
 import styles from './signup.module.css';
 import { SignupFormState } from '@/features/Auth/actions/signup.types';
+import type { ISignupFormProps } from './SignupForm.types';
+import { INITIAL_STATE } from './SignupForm.constants';
 
-const initialState = {
-  status: 'idle' as const,
-  message: '',
-  errors: null,
-};
-
-export const SignupForm = () => {
+export const SignupForm = ({
+  formFields,
+}: ISignupFormProps): ReactNode => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [state, formAction, isPending] = useActionState<
     SignupFormState,
     FormData
-  >(signup, initialState);
+  >(signup, INITIAL_STATE);
+
   const {
     register,
     handleSubmit,
@@ -34,64 +38,54 @@ export const SignupForm = () => {
     resolver: zodResolver(signupSchema),
   });
 
-  const formRef = useRef<HTMLFormElement>(null);
-
   const onSubmit = async () => {
     if (formRef.current) {
       const formData = new FormData(formRef.current);
-      startTransition(() => {
-        formAction(formData);
-      });
+      startTransition(() => formAction(formData));
     }
   };
 
-  console.log({ state });
-
   return (
     <section className={styles.signupWrapper}>
-      <form
-        ref={formRef}
-        action={formAction}
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <TextField
-          {...register('email')}
-          icon={<Mail />}
-          type="email"
-          name="email"
-          id="email"
-          label="Email"
-          tabIndex={0}
-          aria-label="email"
-          isError={Boolean(errors?.email)}
-          error={errors?.email?.message}
-        />
-        <TextField
-          {...register('password')}
-          icon={<Lock />}
-          type="password"
-          name="password"
-          id="password"
-          label="Create password"
-          htmlFor="password"
-          isError={Boolean(errors?.password)}
-          error={errors?.password?.message}
-        />
-        <TextField
-          {...register('confirmPassword')}
-          icon={<Lock />}
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          label="Confirm password"
-          htmlFor="confirmPassword"
-          isError={Boolean(errors?.confirmPassword)}
-          error={errors?.confirmPassword?.message}
-        />
-        <SubmitButton isPending={isPending}>
-          Create new account
-        </SubmitButton>
-      </form>
+      <div className={styles.formContainer}>
+        <h2 className={styles.signupTitle}>Create Account</h2>
+        <form
+          ref={formRef}
+          action={formAction}
+          onSubmit={handleSubmit(onSubmit)}
+          className={styles.form}
+        >
+          {formFields.map(
+            ({ name, label, type, icon, placeholder }) => (
+              <div key={name} className={styles.fieldContainer}>
+                <TextField
+                  {...register(name as keyof SignupFormData)}
+                  icon={icon}
+                  type={type}
+                  name={name}
+                  id={name}
+                  label={label}
+                  placeholder={placeholder}
+                  htmlFor={name}
+                  isError={Boolean(
+                    errors[name as keyof SignupFormData]
+                  )}
+                  error={
+                    errors[name as keyof SignupFormData]?.message
+                  }
+                  className={styles.signupFields}
+                />
+              </div>
+            )
+          )}
+
+          <div className={styles.buttonWrapper}>
+            <SubmitButton isPending={isPending}>
+              Create new account
+            </SubmitButton>
+          </div>
+        </form>
+      </div>
     </section>
   );
 };
