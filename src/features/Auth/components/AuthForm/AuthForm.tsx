@@ -28,6 +28,9 @@ import {
   INITIAL_SIGNIN_STATE,
   INITIAL_SIGNUP_STATE,
 } from './AuthForm.constants';
+import { getCaptchaToken } from '@/utils';
+import { Github } from 'lucide-react';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
 
 export const AuthForm = ({
   formFields,
@@ -56,6 +59,7 @@ export const AuthForm = ({
       : "Don't have an account?",
     secondaryLinkText: isSignup ? 'Log in' : 'Sign Up',
     secondaryLink: isSignup ? '/signin' : '/signup',
+    oauthButtonText: isSignup ? 'Signup' : 'Login',
   };
 
   const {
@@ -67,16 +71,47 @@ export const AuthForm = ({
   });
 
   const onSubmit = async () => {
-    if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      startTransition(() => formAction(formData));
+    try {
+      const token = await getCaptchaToken();
+
+      if (!token) {
+        startTransition(() => {
+          formAction(new FormData());
+        });
+        return;
+      }
+
+      if (formRef.current) {
+        const formData = new FormData(formRef.current);
+        formData.append('captchaToken', token);
+
+        startTransition(() => {
+          formAction(formData);
+        });
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      startTransition(() => {
+        formAction(new FormData());
+      });
     }
   };
 
+  console.log({ isPending });
+
   return (
-    <section className={styles.signupWrapper}>
+    <section className={styles.authWrapper}>
       <div className={styles.formContainer}>
-        <h2 className={styles.signupTitle}>{config.title}</h2>
+        <h2 className={styles.authTitle}>{config.title}</h2>
+        <div className={styles.secondaryTextWrapper}>
+          <span>{config.secondaryText} </span>
+          <Link
+            href={config.secondaryLink}
+            className={styles.secondaryTextLink}
+          >
+            {config.secondaryLinkText}
+          </Link>
+        </div>
         <form
           ref={formRef}
           action={formAction}
@@ -101,24 +136,39 @@ export const AuthForm = ({
                   error={
                     errors[name as keyof SignupFormData]?.message
                   }
-                  className={styles.signupFields}
+                  className={styles.authFields}
+                  disabled={isPending}
                 />
               </div>
             )
           )}
-
           <div className={styles.buttonWrapper}>
             <SubmitButton isPending={isPending}>
               {config.buttonText}
             </SubmitButton>
           </div>
+          <div className={styles.hrWrapper}>
+            <hr className={styles.hrSolid} /> <span>OR </span>
+            <hr className={styles.hrSolid} />
+          </div>
+          <div className={styles.buttonOAuthWrapper}>
+            <SubmitButton
+              className={styles.buttonOAuth}
+              isPending={isPending}
+            >
+              <FaGithub className={styles.iconOAuth} />
+              {config.oauthButtonText} with Github
+            </SubmitButton>
+
+            <SubmitButton
+              className={styles.buttonOAuth}
+              isPending={isPending}
+            >
+              <FaGoogle className={styles.iconOAuth} />
+              {config.oauthButtonText} with Google
+            </SubmitButton>
+          </div>
         </form>
-        <div className={styles.secondaryTextWrapper}>
-          <span>{config.secondaryText} </span>
-          <Link href={config.secondaryLink}>
-            {config.secondaryLinkText}
-          </Link>
-        </div>
       </div>
     </section>
   );

@@ -17,8 +17,6 @@
 
 .authTitle {
   font-size: var(--heading-font-bold-md);
-  margin-bottom: 1.5rem;
-  text-align: center;
   color: var(--color-neutral-900);
 }
 
@@ -44,10 +42,47 @@
 .buttonWrapper > button {
   width: 100%;
   padding: 0.45rem 1.75rem;
+  font-size: 0.78rem;
 }
 
 .secondaryTextWrapper {
-  margin-top: 10px;
+  text-align: start;
+  margin-bottom: 1rem;
+}
+
+.secondaryTextLink {
+  text-decoration: underline;
+}
+
+.hrWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hrSolid {
+  border-top: 1px solid #bbb;
+  width: 7.6rem;
+  margin: 1rem 0.2rem;
+}
+
+.buttonOAuthWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.iconOAuth {
+  width: 16px;
+  margin-right: 6px;
+}
+
+.buttonOAuth {
+  background-color: var(--color-neutral-900);
+  color: var(--color-neutral-0);
+  padding: 0.65rem 0.5rem;
+  font-size: 0.7rem;
 }
 
 @media (max-width: 640px) {

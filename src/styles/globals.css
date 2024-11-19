@@ -31,7 +31,7 @@
     --body-font-regular-sm: 12px;
     --body-font-regular-md: 16px;
     --heading-font-bold-sm: 16px;
-    --heading-font-bold-md: 32px;
+    --heading-font-bold-md: 24px;
 
     /* Tailwind variables */
     --background: 0 0% 100%;
@@ -61,7 +61,7 @@
       --body-font-regular-sm: 14px;
       --body-font-regular-md: 18px;
       --heading-font-bold-sm: 18px;
-      --heading-font-bold-md: 32px;
+      --heading-font-bold-md: 24px;
     }
   }
 

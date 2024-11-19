@@ -14,23 +14,23 @@ export const SubmitButton = ({
   children,
 }: ILoadingButton) => {
   return (
-    <>
-      <Button
-        tabIndex={0}
-        type="submit"
-        disabled={isPending}
-        className={className}
-      >
+    <Button
+      tabIndex={0}
+      type="submit"
+      isDisabled={isPending}
+      className={`${className} ${styles.submitButtonContainer}`}
+    >
+      <div className={styles.buttonContent}>
         {isPending ? (
-          <>
+          <div className={styles.spinnerWrapper}>
             <Icons.spinner
-              className={`${styles.submitBtnIcon} ${styles.spinner} w-8 h-8 mr-2`}
+              className={`${styles.submitBtnIcon} ${styles.spinner}`}
             />
-          </>
+          </div>
         ) : (
-          <>{children}</>
+          <div className={styles.childrenWrapper}>{children}</div>
         )}
-      </Button>
-    </>
+      </div>
+    </Button>
   );
 };

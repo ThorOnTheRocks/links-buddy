@@ -15,6 +15,8 @@ import { Status } from '@/types/common.types';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { deleteSessionCookie, getAuth } from '../lib/cookie';
+import { createFormState } from '@/presentation/widgets/EmailSubscription/utils';
+import { CaptchaError, verifyCaptchaToken } from '@/utils';
 
 export const signup = async (
   _formState: SignupFormState,
@@ -29,14 +31,57 @@ export const signup = async (
 
     const validatedData = signupSchema.safeParse(formDataRaw);
 
+    if (!validatedData.success) {
+      return {
+        status: Status.ERROR,
+        message: 'Validation failed',
+        errors: validatedData.error.flatten().fieldErrors,
+      };
+    }
+
+    const captchaToken = formData.get('captchaToken');
+    if (!captchaToken) {
+      return {
+        status: Status.ERROR,
+        message: 'Verification is required',
+        errors: null,
+      };
+    }
+
+    try {
+      const captchaData = await verifyCaptchaToken(
+        captchaToken as string
+      );
+      if (!captchaData.success || captchaData.score < 0.5) {
+        return {
+          status: Status.ERROR,
+          message: 'Verification failed',
+          errors: null,
+        };
+      }
+    } catch (error) {
+      return {
+        status: Status.ERROR,
+        message:
+          error instanceof CaptchaError
+            ? error.message
+            : 'Verification error',
+        errors: null,
+      };
+    }
+
     const existingUser = await prisma.user.findUnique({
       where: {
-        email: validatedData.data?.email,
+        email: validatedData.data.email,
       },
     });
 
     if (existingUser) {
-      throw new Error('Email already registered');
+      return {
+        status: Status.ERROR,
+        message: 'Email already registered',
+        errors: null,
+      };
     }
 
     const passwordHash = await hashPassword(
@@ -45,7 +90,7 @@ export const signup = async (
 
     const user = await prisma.user.create({
       data: {
-        email: validatedData.data?.email!,
+        email: validatedData.data.email,
         passwordHash,
       },
     });
