@@ -24,3 +24,15 @@ export type SignupFormState = BaseFormState & {
 export type SigninFormState = BaseFormState & {
   errors?: SigninErrors | null;
 };
+
+export type OAuthProvider = 'googleId' | 'githubId';
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  googleId: string | null;
+  githubId: string | null;
+  username: string;
+  passwordHash: string | null;
+}

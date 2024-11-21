@@ -19,12 +19,16 @@ import {
 import styles from './email-subscription.module.css';
 import { useAlert } from '@/presentation/components/Alert';
 import { getCaptchaToken } from '@/utils';
+import { useRecaptcha } from '@/presentation/hooks/useRecaptcha';
 
 export const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction, isPending] = useActionState<
     EmailSubscriptionFormState,
     FormData
   >(createEmailSubscription, initialFormState);
+
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
+  useRecaptcha(siteKey);
 
   const formRef = useRef<HTMLFormElement>(null);
 

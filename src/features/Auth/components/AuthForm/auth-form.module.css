@@ -79,8 +79,6 @@
 }
 
 .buttonOAuth {
-  background-color: var(--color-neutral-900);
-  color: var(--color-neutral-0);
   padding: 0.65rem 0.5rem;
   font-size: 0.7rem;
 }

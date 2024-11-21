@@ -17,7 +17,11 @@ import {
   type SignupFormData,
 } from '@/schema/auth.schema';
 
-import { SubmitButton, TextField } from '@/presentation/components';
+import {
+  Button,
+  SubmitButton,
+  TextField,
+} from '@/presentation/components';
 import styles from './auth-form.module.css';
 import {
   SignupFormState,
@@ -29,8 +33,8 @@ import {
   INITIAL_SIGNUP_STATE,
 } from './AuthForm.constants';
 import { getCaptchaToken } from '@/utils';
-import { Github } from 'lucide-react';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
+import { useRecaptcha } from '@/presentation/hooks/useRecaptcha';
 
 export const AuthForm = ({
   formFields,
@@ -50,6 +54,9 @@ export const AuthForm = ({
   >(serverAction, INITIAL_STATE);
 
   const schema = isSignup ? signupSchema : signInSchema;
+
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
+  useRecaptcha(siteKey);
 
   const config = {
     title: isSignup ? 'Create Your Account' : 'Welcome Back',
@@ -96,8 +103,6 @@ export const AuthForm = ({
       });
     }
   };
-
-  console.log({ isPending });
 
   return (
     <section className={styles.authWrapper}>
@@ -152,21 +157,29 @@ export const AuthForm = ({
             <hr className={styles.hrSolid} />
           </div>
           <div className={styles.buttonOAuthWrapper}>
-            <SubmitButton
+            <Button
+              type="button"
               className={styles.buttonOAuth}
-              isPending={isPending}
+              variant="secondary"
+              onClick={() => {
+                window.location.href = '/api/login/github';
+              }}
             >
               <FaGithub className={styles.iconOAuth} />
               {config.oauthButtonText} with Github
-            </SubmitButton>
+            </Button>
 
-            <SubmitButton
+            <Button
+              type="button"
               className={styles.buttonOAuth}
-              isPending={isPending}
+              variant="secondary"
+              onClick={() => {
+                window.location.href = '/api/login/google';
+              }}
             >
               <FaGoogle className={styles.iconOAuth} />
               {config.oauthButtonText} with Google
-            </SubmitButton>
+            </Button>
           </div>
         </form>
       </div>
