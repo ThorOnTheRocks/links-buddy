@@ -6,6 +6,5 @@ export default async function Dashboard() {
   if (!session) {
     redirect('/');
   }
-  console.log({ user });
   return <div>Welcome {`${user?.username || user?.name}`}!</div>;
 }

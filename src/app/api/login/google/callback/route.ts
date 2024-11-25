@@ -50,7 +50,6 @@ export async function GET(request: Request): Promise<Response> {
   }
 
   const claims = decodeIdToken(tokens.idToken());
-  console.log({ claims });
   const claimsParser = new ObjectParser(claims);
 
   const googleId = claimsParser.getString('sub');

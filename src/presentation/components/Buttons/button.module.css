@@ -44,7 +44,7 @@
 }
 
 .btnSecondary:active {
-  background-color: var(--color-primary-hover);
+  box-shadow: 0rem 0rem 2rem 0rem var(--color-primary-hover);
   cursor: pointer;
 }
 
