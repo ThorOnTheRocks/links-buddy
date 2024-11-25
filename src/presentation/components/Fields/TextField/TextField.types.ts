@@ -6,5 +6,5 @@ export interface ITextFieldProps
   htmlFor?: string;
   icon?: ReactNode;
   isError?: boolean;
-  error?: string | undefined;
+  error?: string;
 }

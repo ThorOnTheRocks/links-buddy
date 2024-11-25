@@ -1,4 +1,4 @@
-import type { Status } from '@/types/common.types';
+import { Status } from '@/types/common.types';
 
 export type EmailSubscriptionFormState = {
   status: Status;
@@ -11,7 +11,7 @@ export type EmailSubscriptionFormState = {
 };
 
 export const initialFormState: EmailSubscriptionFormState = {
-  status: 'idle',
+  status: Status.IDLE,
   message: '',
   errors: {},
   trigger: 0,

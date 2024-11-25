@@ -3,11 +3,12 @@
 import {
   CaptchaError,
   verifyCaptchaToken,
-  createFormState,
   validateEmail,
-  createSubscription,
-} from '../../../utils';
+} from '@/utils';
+import { createFormState, createSubscription } from '../../../utils';
 import { sendEmail } from '../send-email';
+import { Status } from '@/types/common.types';
+import { EmailSubscriptionSchema } from '../../../schema/EmailSubscriptionSchema';
 import type { EmailSubscriptionFormState } from '../email-subscription/email-subscription.types';
 
 export async function createEmailSubscription(
@@ -15,7 +16,10 @@ export async function createEmailSubscription(
   formData: FormData
 ): Promise<EmailSubscriptionFormState> {
   try {
-    const { email } = await validateEmail(formData);
+    const { email } = await validateEmail(
+      formData,
+      EmailSubscriptionSchema
+    );
 
     try {
       const token = formData.get('tokenGRecaptcha');
@@ -29,7 +33,7 @@ export async function createEmailSubscription(
       }
     } catch (error) {
       return createFormState(
-        'error',
+        Status.ERROR,
         error instanceof CaptchaError
           ? error.message
           : 'Verification error'
@@ -40,12 +44,12 @@ export async function createEmailSubscription(
     await sendEmail(email);
 
     return createFormState(
-      'success',
+      Status.SUCCESS,
       'Successfully subscribed! Check your email for confirmation.'
     );
   } catch (error) {
     return createFormState(
-      'error',
+      Status.ERROR,
       error instanceof Error
         ? error.message
         : 'An unexpected error occurred'

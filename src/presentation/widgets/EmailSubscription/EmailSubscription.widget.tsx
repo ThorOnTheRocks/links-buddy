@@ -11,16 +11,24 @@ import {
 } from './actions';
 import { EmailSubscriptionSchema } from './schema/EmailSubscriptionSchema';
 import { EmailSubscriptionForm } from './EmailSubscription.types';
-import { TextField, Alert, SubmitButton } from '../../components';
+import {
+  TextField,
+  Alert,
+  SubmitButton,
+} from '@/presentation/components';
 import styles from './email-subscription.module.css';
-import { useAlert } from '../../components/Alert';
-import { getCaptchaToken } from './utils/captcha/captcha.client';
+import { useAlert } from '@/presentation/components/Alert';
+import { getCaptchaToken } from '@/utils';
+import { useRecaptcha } from '@/presentation/hooks/useRecaptcha';
 
-const EmailSubscription = (): React.JSX.Element => {
+export const EmailSubscription = (): React.JSX.Element => {
   const [state, formAction, isPending] = useActionState<
     EmailSubscriptionFormState,
     FormData
   >(createEmailSubscription, initialFormState);
+
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? '';
+  useRecaptcha(siteKey);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -108,5 +116,3 @@ const EmailSubscription = (): React.JSX.Element => {
     </>
   );
 };
-
-export default EmailSubscription;

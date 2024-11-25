@@ -1,0 +1,89 @@
+.authWrapper {
+  background-color: var(--color-neutral-300);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.formContainer {
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 24rem;
+}
+
+.authTitle {
+  font-size: var(--heading-font-bold-md);
+  color: var(--color-neutral-900);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 80px;
+}
+
+.authFields {
+  width: 100%;
+}
+
+.buttonWrapper {
+  width: 100%;
+}
+
+.buttonWrapper > button {
+  width: 100%;
+  padding: 0.45rem 1.75rem;
+  font-size: 0.78rem;
+}
+
+.secondaryTextWrapper {
+  text-align: start;
+  margin-bottom: 1rem;
+}
+
+.secondaryTextLink {
+  text-decoration: underline;
+}
+
+.hrWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.hrSolid {
+  border-top: 1px solid #bbb;
+  width: 8.2rem;
+  margin: 1rem 0.2rem;
+}
+
+@media (max-width: 640px) {
+  .formContainer {
+    padding: 1.5rem;
+  }
+
+  .authTitle {
+    font-size: var(--heading-font-bold-sm);
+    margin-bottom: 1rem;
+  }
+
+  .form {
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .formContainer {
+    padding: 2.5rem;
+  }
+}

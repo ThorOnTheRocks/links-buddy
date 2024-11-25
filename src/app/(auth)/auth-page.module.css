@@ -1,0 +1,13 @@
+.signupPageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.logo {
+  width: 40rem;
+  height: auto;
+  margin-bottom: 2.5rem;
+}

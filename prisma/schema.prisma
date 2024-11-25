@@ -14,3 +14,46 @@ model EmailSubscription {
   createdAt  DateTime @default(now())
   email      String   @unique
 }
+
+model User {
+  id           String    @id @default(cuid())
+  sessions     Session[]
+  email        String    @unique
+  passwordHash String?
+  googleId     String?   @unique
+	name         String?
+  githubId     Int?      @unique
+  picture      String?
+  username     String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+}
+
+model UserAuthProvider {
+  id          String      @id @default(uuid())
+  userId      String
+  provider    AuthProvider
+  providerId  String
+  email       String
+  createdAt   DateTime    @default(now())
+  lastUsedAt  DateTime    @default(now())
+
+  @@unique([provider, providerId])
+  @@unique([provider, email])
+  @@index([userId])
+  @@index([provider, providerId])
+  @@index([provider, email])
+}
+
+enum AuthProvider {
+  LOCAL
+  GITHUB
+  GOOGLE
+}
