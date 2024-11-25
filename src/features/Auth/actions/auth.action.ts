@@ -6,6 +6,7 @@ import {
   SignupFormState,
   SigninFormState,
   OAuthProvider,
+  CreateUserData,
 } from './auth.types';
 import {
   hashPassword,
@@ -195,11 +196,6 @@ export const signOut = async () => {
 
   redirect('/signin');
 };
-
-type CreateUserData = Omit<
-  Prisma.UserCreateInput,
-  OAuthProvider | 'id' | 'createdAt' | 'updatedAt'
->;
 
 export async function createUser(
   providerId: OAuthProvider,

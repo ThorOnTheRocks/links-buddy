@@ -61,6 +61,7 @@ export async function GET(request: Request): Promise<Response> {
   const githubUserId = githubUser.id;
   const githubUsername = githubUser.login;
   const githubUserPicture = githubUser.avatar_url;
+  const githubUserEmail = githubUser.email;
 
   const existingUser = await getUserFromProviderId(
     'githubId',
@@ -83,12 +84,11 @@ export async function GET(request: Request): Promise<Response> {
     });
   }
 
-  const user = await createUser(
-    'githubId',
-    githubUserId,
-    githubUsername,
-    githubUserPicture
-  );
+  const user = await createUser('githubId', githubUserId, {
+    username: githubUsername,
+    picture: githubUserPicture,
+    email: githubUserEmail,
+  });
 
   const sessionToken = generateRandomSessionToken();
   const session = await createSession(sessionToken, user.id);

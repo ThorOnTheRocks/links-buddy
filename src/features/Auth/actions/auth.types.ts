@@ -27,6 +27,11 @@ export type SigninFormState = BaseFormState & {
 
 export type OAuthProvider = 'googleId' | 'githubId';
 
+export type CreateUserData = Omit<
+  Prisma.UserCreateInput,
+  OAuthProvider | 'id' | 'createdAt' | 'updatedAt'
+>;
+
 export interface User {
   id: string;
   email: string;
