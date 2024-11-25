@@ -20,7 +20,7 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { deleteSessionCookie, getAuth } from '../lib/cookie';
 import { CaptchaError, verifyCaptchaToken } from '@/utils';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 
 export const signup = async (
   _formState: SignupFormState,
@@ -196,32 +196,25 @@ export const signOut = async () => {
   redirect('/signin');
 };
 
+type CreateUserData = Omit<
+  Prisma.UserCreateInput,
+  OAuthProvider | 'id' | 'createdAt' | 'updatedAt'
+>;
+
 export async function createUser(
   providerId: OAuthProvider,
   providerValue: string,
-  email: string,
-  username: string
+  userData: CreateUserData
 ): Promise<User> {
   try {
     const user = await prisma.user.create({
       data: {
         [providerId]: providerValue,
-        email,
-        username,
+        ...userData,
       },
     });
 
-    return {
-      id: user.id,
-      googleId: user.googleId ?? null,
-      githubId: user.githubId ?? null,
-      name: user.name ?? '',
-      email: user.email,
-      username: user.username ?? '',
-      passwordHash: user.passwordHash ?? null,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
+    return user;
   } catch (error) {
     throw new Error('Failed to create user: ' + error);
   }
@@ -232,27 +225,20 @@ export async function getUserFromProviderId(
   providerValue: string
 ): Promise<User | null> {
   try {
+    const whereInputs = {
+      googleId: { googleId: providerValue },
+      githubId: { githubId: providerValue },
+    } as const;
+
     const user = await prisma.user.findUnique({
-      where: {
-        [providerId]: providerValue,
-      } as { [key in OAuthProvider]: string },
+      where: whereInputs[providerId] as Prisma.UserWhereUniqueInput,
     });
 
     if (!user) {
       return null;
     }
 
-    return {
-      id: user.id,
-      googleId: user.googleId ?? null,
-      githubId: user.githubId ?? null,
-      email: user.email,
-      username: user.username ?? '',
-      passwordHash: user.passwordHash ?? null,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-      name: user.name ?? '',
-    };
+    return user;
   } catch (error) {
     throw new Error('Failed to fetch user: ' + error);
   }

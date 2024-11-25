@@ -22,7 +22,8 @@ model User {
   passwordHash String?
   googleId     String?   @unique
 	name         String?
-  githubId     String?   @unique
+  githubId     Int?      @unique
+  picture      String?
   username     String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt

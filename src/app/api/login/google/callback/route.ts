@@ -54,7 +54,7 @@ export async function GET(request: Request): Promise<Response> {
   const claimsParser = new ObjectParser(claims);
 
   const googleId = claimsParser.getString('sub');
-  // const email = claimsParser.getString('email');
+  const email = claimsParser.getString('iss');
   const name = claimsParser.getString('name');
   const picture = claimsParser.getString('picture');
 
@@ -72,12 +72,16 @@ export async function GET(request: Request): Promise<Response> {
     return new Response(null, {
       status: 302,
       headers: {
-        Location: '/',
+        Location: '/dashboard',
       },
     });
   }
 
-  const user = await createUser('googleId', googleId, name, picture);
+  const user = await createUser('googleId', googleId, {
+    name,
+    picture,
+    email,
+  });
   const sessionToken = generateRandomSessionToken();
   const session = await createSession(sessionToken, user.id);
   setSessionCookie(sessionToken, session.expiresAt);
