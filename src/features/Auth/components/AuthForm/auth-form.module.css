@@ -56,32 +56,15 @@
 
 .hrWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   font-size: 12px;
 }
 
 .hrSolid {
   border-top: 1px solid #bbb;
-  width: 7.6rem;
+  width: 8.2rem;
   margin: 1rem 0.2rem;
-}
-
-.buttonOAuthWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.iconOAuth {
-  width: 16px;
-  margin-right: 6px;
-}
-
-.buttonOAuth {
-  padding: 0.65rem 0.5rem;
-  font-size: 0.7rem;
 }
 
 @media (max-width: 640px) {

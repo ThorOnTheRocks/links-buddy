@@ -1,4 +1,5 @@
 import { Status } from '@/types/common.types';
+import { Prisma } from '@prisma/client';
 
 type BaseFormState = {
   status: Status;

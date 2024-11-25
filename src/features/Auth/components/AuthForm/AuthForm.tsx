@@ -17,11 +17,7 @@ import {
   type SignupFormData,
 } from '@/schema/auth.schema';
 
-import {
-  Button,
-  SubmitButton,
-  TextField,
-} from '@/presentation/components';
+import { SubmitButton, TextField } from '@/presentation/components';
 import styles from './auth-form.module.css';
 import {
   SignupFormState,
@@ -33,8 +29,8 @@ import {
   INITIAL_SIGNUP_STATE,
 } from './AuthForm.constants';
 import { getCaptchaToken } from '@/utils';
-import { FaGoogle, FaGithub } from 'react-icons/fa';
 import { useRecaptcha } from '@/presentation/hooks/useRecaptcha';
+import { OauthButtons } from '../Oauth/OauthButtons';
 
 export const AuthForm = ({
   formFields,
@@ -156,31 +152,7 @@ export const AuthForm = ({
             <hr className={styles.hrSolid} /> <span>OR </span>
             <hr className={styles.hrSolid} />
           </div>
-          <div className={styles.buttonOAuthWrapper}>
-            <Button
-              type="button"
-              className={styles.buttonOAuth}
-              variant="secondary"
-              onClick={() => {
-                window.location.href = '/api/login/github';
-              }}
-            >
-              <FaGithub className={styles.iconOAuth} />
-              {config.oauthButtonText} with Github
-            </Button>
-
-            <Button
-              type="button"
-              className={styles.buttonOAuth}
-              variant="secondary"
-              onClick={() => {
-                window.location.href = '/api/login/google';
-              }}
-            >
-              <FaGoogle className={styles.iconOAuth} />
-              {config.oauthButtonText} with Google
-            </Button>
-          </div>
+          <OauthButtons labelBtn={config.oauthButtonText} />
         </form>
       </div>
     </section>
