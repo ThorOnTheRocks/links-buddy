@@ -67,6 +67,8 @@ export async function GET(request: Request): Promise<Response> {
     githubUserId
   );
 
+  console.log({ existingUser });
+
   if (existingUser !== null) {
     const sessionToken = generateRandomSessionToken();
     const session = await createSession(
@@ -88,6 +90,8 @@ export async function GET(request: Request): Promise<Response> {
     picture: githubUserPicture,
     email: githubUserEmail,
   });
+
+  console.log({ user });
 
   const sessionToken = generateRandomSessionToken();
   const session = await createSession(sessionToken, user.id);

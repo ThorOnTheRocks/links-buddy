@@ -7,8 +7,13 @@ const allowedOrigins = isProduction
       'https://linksbuddy.org',
       'http://localhost:3000',
       'https://github.com',
+      'https://google.com',
     ]
-  : ['http://localhost:3000', 'https://github.com'];
+  : [
+      'http://localhost:3000',
+      'https://github.com',
+      'https://google.com',
+    ];
 
 export function middleware(req: NextRequest) {
   const origin = req.headers.get('origin') || '';

@@ -10,7 +10,7 @@ const getBaseUrl = (): string => {
   const environment = process.env.NODE_ENV || 'development';
   if (environment === 'production') {
     return (
-      process.env.NEXT_PUBLIC_APP_URL || 'https://www.linksbuddy.org'
+      process.env.NEXT_PUBLIC_APP_URL || 'https://linksbuddy.org'
     );
   }
   return 'http://localhost:3000';
