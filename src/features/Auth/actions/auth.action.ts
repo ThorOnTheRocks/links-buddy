@@ -205,13 +205,19 @@ export async function createUser(
   try {
     const user = await prisma.user.create({
       data: {
-        [providerId]: providerValue,
         ...userData,
+        [providerId]: providerValue,
+        email:
+          userData.email ||
+          `${
+            userData.username || userData.name || 'user'
+          }@${providerValue}.com`,
       },
     });
 
     return user;
   } catch (error) {
+    console.error(`Failed to create ${providerValue} user:`, error);
     throw new Error('Failed to create user: ' + error);
   }
 }

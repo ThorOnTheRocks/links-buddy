@@ -25,6 +25,7 @@
     "@prisma/adapter-pg": "^5.12.1",
     "@prisma/client": "^5.22.0",
     "@react-email/components": "0.0.25",
+    "@supabase/supabase-js": "^2.46.2",
     "arctic": "^2.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
