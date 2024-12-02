@@ -88,7 +88,7 @@ export async function GET(request: Request): Promise<Response> {
   const user = await createUser('githubId', githubUserId, {
     username: githubUsername,
     picture: githubUserPicture,
-    email: githubUserEmail,
+    email: githubUserEmail ?? `${githubUsername}@github.com`,
   });
 
   console.log({ user });

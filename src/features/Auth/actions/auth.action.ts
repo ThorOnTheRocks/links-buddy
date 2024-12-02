@@ -207,11 +207,6 @@ export async function createUser(
       data: {
         ...userData,
         [providerId]: providerValue,
-        email:
-          userData.email ||
-          `${
-            userData.username || userData.name || 'user'
-          }@${providerValue}.com`,
       },
     });
 
