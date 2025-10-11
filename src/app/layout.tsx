@@ -4,7 +4,7 @@ import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'LinksBuddy',
-  description: 'Supercharge your links collections',
+  description: 'Supercharge your links collections with LinksBuddy',
 };
 
 export default function RootLayout({
